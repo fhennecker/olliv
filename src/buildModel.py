@@ -71,11 +71,14 @@ c.execute('''CREATE TABLE Trips(
                 endDate         DATETIME,
                 startStation    INT UNSIGNED,
                 endStation      INT UNSIGNED,
+                bike            INT UNSIGNED,
+                paid            BOOLEAN,
 
                 PRIMARY KEY (user, startDate),
                 FOREIGN KEY (user) REFERENCES Users(id),
                 FOREIGN KEY (startStation) REFERENCES Stations(id),
-                FOREIGN KEY (endStation) REFERENCES Stations(id)
+                FOREIGN KEY (endStation) REFERENCES Stations(id),
+                FOREIGN KEY (bike) REFERENCES Bikes(id)
                 )''')
 
 connexion.commit()
