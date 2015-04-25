@@ -21,10 +21,10 @@ c = connexion.cursor()
 c.execute('''CREATE TABLE Stations(
                 id          INT UNSIGNED        NOT NULL,
                 name        VARCHAR(64),
+                payTerminal BOOLEAN,
+                capacity    SMALLINT UNSIGNED,
                 gpsx        DECIMAL(9,6),
                 gpsy        DECIMAL(9,6),
-                capacity    SMALLINT UNSIGNED,
-                payTerminal BOOLEAN,
 
                 PRIMARY KEY (id)
                 )''')
