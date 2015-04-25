@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Station</title>
+</head>
+<body>
+    <h1>{{ station[1] }}</h1>
+    {{ station }}
+    <h3>Bikes</h3>
+    <ul>
+        {% for bike in bikes %}
+            <li>{{ bike[0] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+
