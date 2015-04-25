@@ -1,4 +1,4 @@
-from flask import Flask, g, render_template
+from flask import Flask, g, render_template, abort
 import sqlite3
 app = Flask(__name__)
 
@@ -27,8 +27,18 @@ def hello_world():
 @app.route('/stations')
 def display_stations():
     c = get_db().cursor()
-    stations = c.execute("SELECT name FROM Stations").fetchall()
+    stations = c.execute("SELECT id, name FROM Stations").fetchall()
     return render_template("stations.html", stations=stations)
+
+@app.route('/station/<station_id>')
+def display_station(station_id):
+    c = get_db().cursor()
+    print station_id
+    station = c.execute("SELECT * FROM Stations WHERE id == (?)", (station_id,)).fetchone()
+    bikes = c.execute("SELECT id FROM Bikes WHERE station == (?)", (station_id,)).fetchall()
+    if station is None:
+        abort(404) 
+    return render_template("station.html", station=station, bikes=bikes)
 
 
 

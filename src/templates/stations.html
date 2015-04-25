@@ -5,7 +5,7 @@
 <body>
     <ul>
         {% for station in stations %}
-            <li>{{ station[0].capitalize() }}</li>
+            <li><a href="/station/{{ station[0] }}">{{ station[1].capitalize() }}</a></li>
         {% endfor %}
     </ul>
 </body>
