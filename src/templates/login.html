@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    {% if status == "failed" %} <p>Please retry</p> {% endif %}
+    {% if status == "normal" %}
+    <form action="" method="post">
+        <p><input type="text" name="userid"></p>
+        <p><input type="password" name="password"></p>
+        <p><input type="submit" value="login"></p>        
+    </form>
+    {% endif %}
+
+    {% if status == "logged" %} <p>Already logged in! <a href="/logout">Logout</a></p> {% endif %}
+</body>
+</html>
