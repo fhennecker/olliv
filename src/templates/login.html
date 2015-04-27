@@ -1,8 +1,6 @@
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
+{% extends '_master.html' %}
+
+{% block body %}
     {% if status == "failed" %} <p>Please retry</p> {% endif %}
     {% if status == "normal" %}
     <form action="" method="post">
@@ -13,5 +11,4 @@
     {% endif %}
 
     {% if status == "logged" %} <p>Already logged in! <a href="/logout">Logout</a></p> {% endif %}
-</body>
-</html>
+{% endblock %}

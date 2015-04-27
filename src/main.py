@@ -22,9 +22,12 @@ def close_connection(exception):
 # Routes
 @app.route('/')
 def hello_world():
+    firstname, lastname = "", ""
+    logged = ("userid" in session)
     if "userid" in session:
-        return 'Hello '+str(session["userid"])+'!<br/><a href="/stations">See the list of stations &gt;</a><br/><a href="/logout">Logout &gt;</a>'
-    return 'Hello World!<br/><a href="/stations">See the list of stations &gt;</a><br/><a href="/login">Login &gt;</a>'
+        c = get_db().cursor()
+        firstname, lastname = c.execute("SELECT firstname, lastname FROM Subscribers WHERE id == (?)", (session["userid"],)).fetchone()
+    return render_template("index.html", logged=logged, firstname=firstname, lastname=lastname)
 
 @app.route('/stations')
 def display_stations():
@@ -63,6 +66,7 @@ def logout():
     return redirect("/")
 
 
+#ide
 
 if __name__ == '__main__':
     app.debug = True

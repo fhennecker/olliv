@@ -1,14 +1,11 @@
-<html>
-<head>
-    <title>Stations</title>
-</head>
-<body>
+{% extends '_master.html' %}
+
+{% block body %}
     <ul>
         {% for station in stations %}
             <li><a href="/station/{{ station[0] }}">{{ station[1].capitalize() }}</a></li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
 
 

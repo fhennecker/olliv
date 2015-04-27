@@ -1,0 +1,13 @@
+{% extends '_master.html' %}
+
+{% block body %}
+    {% if logged == True %}
+        <h3>Hello {{ firstname + " " + lastname }}!</h3>
+        <a href="/stations">See the list of stations &gt;</a><br/>
+        <a href="/logout">Logout &gt;</a>
+    {% else %}
+        <h3>Hello world!</h3>
+        <a href="/stations">See the list of stations &gt;</a><br/>
+        <a href="/login">Login &gt;</a>
+    {% endif %}
+{% endblock %}
