@@ -1,5 +1,6 @@
 from flask import Flask, g, render_template, abort, session, redirect, url_for, escape, request
 import sqlite3
+from DAO import Station, Bike
 app = Flask(__name__)
 
 ################################################################################
@@ -10,6 +11,7 @@ def get_db():
     db = getattr(g, '_database', None)
     if db is None:
         db = g._database = sqlite3.connect(DATABASE)
+    db.row_factory = sqlite3.Row
     return db
 
 @app.teardown_appcontext
@@ -38,8 +40,8 @@ def display_stations():
 @app.route('/station/<station_id>')
 def display_station(station_id):
     c = get_db().cursor()
-    station = c.execute("SELECT * FROM Stations WHERE id == (?)", (station_id,)).fetchone()
-    bikes = c.execute("SELECT id FROM Bikes WHERE station == (?)", (station_id,)).fetchall()
+    station = Station(c.execute("SELECT * FROM Stations WHERE id == (?)", (station_id,)).fetchone())
+    bikes = map(Bike, c.execute("SELECT id FROM Bikes WHERE station == (?)", (station_id,)).fetchall())
     if station is None:
         abort(404) 
     return render_template("station.html", station=station, bikes=bikes)
