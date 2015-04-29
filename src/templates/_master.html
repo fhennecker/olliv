@@ -5,7 +5,12 @@
     <link rel="stylesheet" type="text/css" href="/static/main.css" />
 </head>
 <body>
-    {% block body %}
-    {% endblock %}
+    {% include '_userinfo.html' %}
+    <div class="row">
+        <div class="columns large-12 medium-12 small-12">
+        {% block body %}
+        {% endblock %}
+        </div>
+    </div>
 </body>
 </html>

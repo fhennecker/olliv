@@ -55,6 +55,10 @@ def login():
         userinfo = c.execute("SELECT id, password FROM Users WHERE id == (?)", (userid,)).fetchone()
         if password == userinfo[1]:
             session["userid"] = userid
+            subinfo = c.execute("SELECT firstname, lastname FROM Subscribers WHERE id == (?)", (userid,)).fetchone()
+            if len(subinfo) > 0:
+                session["firstname"] = subinfo[0]
+                session["lastname"] = subinfo[1]
             return redirect("/")
         else:
             return render_template("login.html", status="failed")
@@ -65,6 +69,8 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('userid', None)
+    session.pop('firstname', None)
+    session.pop('lastname', None)
     return redirect("/")
 
 
