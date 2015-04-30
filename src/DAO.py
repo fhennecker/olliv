@@ -24,3 +24,14 @@ class Bike():
 
     def __str__(self):
         return "#"+str(self.id)+" - "+self.model+" ("+("OK" if self.state else "NOK") +")"
+
+class Trip():
+    def __init__(self, row):
+        keys = row.keys()
+        self.user = "" if "user" not in keys else row["user"]
+        self.startDate = "" if "startDate" not in keys else row["startDate"]
+        self.endDate = None if "endDate" not in keys else row["endDate"]
+        self.startStation = None if "startStation" not in keys else row["startStation"]
+        self.endStation = None if "endStation" not in keys else row["endStation"]
+        self.bike = "" if "bike" not in keys else row["bike"]
+        self.paid = "" if "paid" not in keys else row["paid"]

@@ -1,0 +1,16 @@
+{% extends '_master.html' %}
+
+{% block body %}
+
+    {% if "firstname" in session %}
+        {% for trip in trips %}
+            <p><strong>{{ trip.startStation }}</strong> ({{ trip.startDate }}) -> <strong>{{ trip.endStation }}</strong> {{ trip.endDate }} | </p>
+        {% endfor %}
+    {% else %}
+        <div data-alert class="alert-box warning radius">
+            You must be logged in to view this page.
+            <a href="#" class="close">&times;</a>
+        </div>
+    {% endif %}
+
+{% endblock %}

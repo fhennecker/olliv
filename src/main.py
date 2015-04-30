@@ -1,6 +1,8 @@
 from flask import Flask, g, render_template, abort, session, redirect, url_for, escape, request
 import sqlite3
-from DAO import Station, Bike
+from DAO import Station, Bike, Trip
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 app = Flask(__name__)
 
 ################################################################################
@@ -45,6 +47,14 @@ def display_station(station_id):
     if station is None:
         abort(404) 
     return render_template("station.html", station=station, bikes=bikes)
+
+@app.route('/trips')
+def display_trips():
+    trips = []
+    if "userid" in session:
+        c = get_db().cursor()
+        trips = map(Trip, c.execute("SELECT * FROM Trips WHERE user == (?)", (session['userid'],)))
+    return render_template("trips.html", trips=trips)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
