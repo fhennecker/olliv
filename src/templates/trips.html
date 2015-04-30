@@ -4,7 +4,12 @@
 
     {% if "firstname" in session %}
         {% for trip in trips %}
-            <p><strong>{{ trip.startStation.name }}</strong> ({{ trip.startDate }}) -> <strong>{{ trip.endStation.name }}</strong> {{ trip.endDate }} | </p>
+            <p>
+                <strong><a href="/station/{{trip.startStation.id}}">{{ trip.startStation.name }}</a></strong> 
+                ({{ trip.startDate }}) <i class="fa fa-bicycle"></i> 
+                <strong><a href="/station/{{trip.endStation.id}}">{{ trip.endStation.name }}</a></strong> 
+                ({{ trip.endDate }}) | 
+            </p>
         {% endfor %}
     {% else %}
         <div data-alert class="alert-box warning radius">
