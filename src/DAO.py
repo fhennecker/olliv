@@ -1,7 +1,7 @@
 import sqlite3
 
 class Station(object):
-    def __init__(self, row):
+    def __init__(self, row={}):
         keys = row.keys() # the rows 
         self.id = -1 if "id" not in keys else row["id"]
         self.name = "" if "name" not in keys else row["name"] 
@@ -31,7 +31,8 @@ class Trip():
         self.user = "" if "user" not in keys else row["user"]
         self.startDate = "" if "startDate" not in keys else row["startDate"]
         self.endDate = None if "endDate" not in keys else row["endDate"]
-        self.startStation = None if "startStation" not in keys else row["startStation"]
-        self.endStation = None if "endStation" not in keys else row["endStation"]
+        self.startStation = Station() if "startStation" not in keys else Station({"id":row["SID"], "name":row["SName"]})
+        self.endStation = Station() if "endStation" not in keys else Station({"id":row["EID"], "name":row["EName"]})
         self.bike = "" if "bike" not in keys else row["bike"]
         self.paid = "" if "paid" not in keys else row["paid"]
+

@@ -42,8 +42,8 @@ def display_stations():
 @app.route('/station/<station_id>')
 def display_station(station_id):
     c = get_db().cursor()
-    station = Station(c.execute("SELECT * FROM Stations WHERE id == (?)", (station_id,)).fetchone())
-    bikes = map(Bike, c.execute("SELECT id FROM Bikes WHERE station == (?)", (station_id,)).fetchall())
+    station = Station(c.execute("SELECT * FROM Stations WHERE id = (?)", (station_id,)).fetchone())
+    bikes = map(Bike, c.execute("SELECT id FROM Bikes WHERE station = (?)", (station_id,)).fetchall())
     if station is None:
         abort(404) 
     return render_template("station.html", station=station, bikes=bikes)
@@ -51,9 +51,14 @@ def display_station(station_id):
 @app.route('/trips')
 def display_trips():
     trips = []
+    stations = {}
     if "userid" in session:
         c = get_db().cursor()
-        trips = map(Trip, c.execute("SELECT * FROM Trips WHERE user == (?)", (session['userid'],)))
+        trips = map(Trip, c.execute(""" SELECT Trips.*, StartStations.id AS SID, StartStations.name AS SName, EndStations.id AS EID, EndStations.name AS EName
+                                        FROM Trips 
+                                        JOIN Stations AS EndStations ON Trips.startStation = StartStations.id 
+                                        JOIN Stations AS StartStations ON Trips.endStation = EndStations.id 
+                                        WHERE user = (?)""", (session['userid'],)))
     return render_template("trips.html", trips=trips)
 
 @app.route('/login', methods=['GET', 'POST'])
