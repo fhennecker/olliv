@@ -1,7 +1,7 @@
 {% extends '_master.html' %}
 
 {% block body %}
-    {% if status == "failed" %} <p>Please retry</p> {% endif %}
+    {% if status == "success" %} <h3>Welcome!</h3> <p>Your user ID is {{ userid }}. You'll need to log in with it so remember it!</p> {% endif %}
     {% if status == "normal" %}
     <div class="row"><div class="columns large-4 medium-4 small-6 large-centered medium-centered small-centered">
         <form action="" method="post" data-abide>
@@ -46,5 +46,4 @@
     </div></div>
     {% endif %}
 
-    {% if status == "logged" %} <p>Already logged in! <a href="/logout">Logout</a></p> {% endif %}
 {% endblock %}

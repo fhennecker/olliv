@@ -73,8 +73,21 @@ def logout():
     session.pop('lastname', None)
     return redirect("/")
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        c = get_db().cursor()
+        r = request.form
+        maxSubID = c.execute("SELECT Max(id) FROM Subscribers").fetchone()[0]
+        newUserID = maxSubID + 1
+        expiryDate = datetime.today() + relativedelta(years=1)
 
-#ide
+        c.execute("INSERT INTO Users VALUES (?, ?, ?, ?)", (newUserID, r["password"], expiryDate, r["card"]))
+        c.execute("INSERT INTO Subscribers VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (newUserID,0,r["lastname"], r["firstname"], r["city"], r["cp"], r["street"], r["number"], datetime.today(), r["phone"]))
+        get_db().commit()
+        return render_template("register.html", status="success", userid=newUserID)
+    else:
+        return render_template("register.html", status="normal")
 
 if __name__ == '__main__':
     app.debug = True
