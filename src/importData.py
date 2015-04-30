@@ -60,7 +60,7 @@ with open(TRIPS_PATH, 'r') as f:
         if endStation == "None": endStation = None
         startTime = startTime.replace("T", " ") if startTime != "None" else None
         endTime = endTime.replace("T", " ") if endTime != "None" else None
-        c.execute("INSERT INTO Trips VALUES (?, ?, ?, ?, ?, ?, ?)", (user, startTime, endTime, startStation, startTime, bike, True if endTime != None else False))
+        c.execute("INSERT INTO Trips VALUES (?, ?, ?, ?, ?, ?, ?)", (user, startTime, endTime, startStation, endStation, bike, True if endTime != None else False))
         c.execute("UPDATE Bikes SET station = (?) WHERE id == (?)", (endStation, bike))
 
 connexion.commit()
