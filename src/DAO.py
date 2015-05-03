@@ -1,6 +1,9 @@
 import sqlite3
 from datetime import datetime
 
+def timedeltaToMinutes(timedelta):
+    return (timedelta.days * 24 * 60) + (timedelta.seconds // 60)
+
 class Station(object):
     def __init__(self, row={}):
         keys = row.keys() # the rows 
@@ -42,8 +45,7 @@ class Trip():
         end = datetime.today()
         if self.endDate:
             end = datetime.strptime(self.endDate, "%Y-%m-%d %H:%M:%S")
-        delta = end-start
-        return delta.seconds // 60
+        return timedeltaToMinutes(end-start)
 
     def cost(self):
         minutes = self.minutesSpent()
