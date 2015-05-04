@@ -1,6 +1,6 @@
 <div class="row"> <div class="columns large-12 medium-12 small-12">
     {% if "firstname" in session %}
-        <p>Hello, {{ session.firstname + " " + session.lastname }} <a href="/trips" class="small radius button">My Trips</a> <a href="/logout" class="small radius button alert">Logout &gt;</a></p>
+        <p>Hello, {{ session["firstname"] + " " + session["lastname"] }} <a href="/trips" class="small radius button">My Trips</a> <a href="/logout" class="small radius button alert">Logout &gt;</a></p>
     {% else %}
         <p><a href="/login" class="small radius button">Login</a> <a href="/register" class="small radius button secondary">Register</a></p>
     {% endif %}

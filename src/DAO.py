@@ -24,7 +24,7 @@ class Bike():
         self.commissionDate = None if "commissionDate" not in keys else row["commissionDate"] 
         self.model = "" if "model" not in keys else row["model"]
         self.state = None if "state" not in keys else row["state"]
-        self.station = -1 if "station" not in keys else row["station"]
+        self.station = None if "station" not in keys else row["station"]
 
     def __str__(self):
         return "#"+str(self.id)+" - "+self.model+" ("+("OK" if self.state else "NOK") +")"
@@ -33,10 +33,10 @@ class Trip():
     def __init__(self, row):
         keys = row.keys()
         self.user = "" if "user" not in keys else row["user"]
-        self.startDate = "" if "startDate" not in keys else row["startDate"]
+        self.startDate = None if "startDate" not in keys else row["startDate"]
         self.endDate = None if "endDate" not in keys else row["endDate"]
-        self.startStation = Station() if "startStation" not in keys else Station({"id":row["SID"], "name":row["SName"]})
-        self.endStation = Station() if "endStation" not in keys else Station({"id":row["EID"], "name":row["EName"]})
+        self.startStation = None if "startStation" not in keys else Station({"id":row["startStation"]})
+        self.endStation = None if "endStation" not in keys else Station({"id":row["endStation"]})
         self.bike = "" if "bike" not in keys else row["bike"]
         self.paid = "" if "paid" not in keys else row["paid"]
 

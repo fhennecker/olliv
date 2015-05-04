@@ -6,7 +6,7 @@
     <h3>Bikes</h3>
     <ul>
         {% for bike in bikes %}
-            <li>{{ bike.id }}</li>
+            <li>{{ bike.id }} - <a href="/bike/{{ bike.id }}">Take it!</a></li>
         {% endfor %}
     </ul>
 {% endblock body %}

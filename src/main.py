@@ -3,6 +3,7 @@ import sqlite3
 from DAO import Station, Bike, Trip
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import requests
 app = Flask(__name__)
 
 ################################################################################
@@ -22,28 +23,25 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
+def getCursor():
+    return get_db().cursor()
+
 ################################################################################
 # Routes
 @app.route('/')
 def hello_world():
-    firstname, lastname = "", ""
-    logged = ("userid" in session)
-    if "userid" in session:
-        c = get_db().cursor()
-        firstname, lastname = c.execute("SELECT firstname, lastname FROM Subscribers WHERE id == (?)", (session["userid"],)).fetchone()
-    return render_template("index.html", logged=logged, firstname=firstname, lastname=lastname)
+    return render_template("index.html")
 
 @app.route('/stations')
 def display_stations():
-    c = get_db().cursor()
-    stations = c.execute("SELECT id, name FROM Stations").fetchall()
+    stations = requests.getStationsList(getCursor())
     return render_template("stations.html", stations=stations)
 
 @app.route('/station/<station_id>')
 def display_station(station_id):
     c = get_db().cursor()
-    station = Station(c.execute("SELECT * FROM Stations WHERE id = (?)", (station_id,)).fetchone())
-    bikes = map(Bike, c.execute("SELECT id FROM Bikes WHERE station = (?)", (station_id,)).fetchall())
+    station = requests.getStation(c, station_id)
+    bikes = requests.getBikesAtStation(c, station_id)
     if station is None:
         abort(404) 
     return render_template("station.html", station=station, bikes=bikes)
@@ -51,15 +49,21 @@ def display_station(station_id):
 @app.route('/trips')
 def display_trips():
     trips = []
-    stations = {}
     if "userid" in session:
-        c = get_db().cursor()
-        trips = map(Trip, c.execute(""" SELECT Trips.*, StartStations.id AS SID, StartStations.name AS SName, EndStations.id AS EID, EndStations.name AS EName
-                                        FROM Trips 
-                                        JOIN Stations AS EndStations ON Trips.startStation = StartStations.id 
-                                        JOIN Stations AS StartStations ON Trips.endStation = EndStations.id 
-                                        WHERE user = (?)""", (session['userid'],)))
+        trips = requests.getTripsForUserID(getCursor(), session["userid"])
     return render_template("trips.html", trips=trips)
+
+@app.route('/bike/<bike_id>')
+def display_bike(bike_id):
+    c = getCursor()
+    bike = requests.getBike(c, bike_id)
+    if bike.station != None:
+        # not in a trip, in a station
+        return redirect("/station/"+str(bike.station))
+    # in a trip
+    lastTrip = requests.getLastTripForBike(c, bike_id)
+    return render_template("trip.html", trip=lastTrip, bike=bike)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -67,10 +71,10 @@ def login():
         c = get_db().cursor()
         userid = int(request.form["userid"])
         password = request.form["password"]
-        userinfo = c.execute("SELECT id, password FROM Users WHERE id == (?)", (userid,)).fetchone()
+        userinfo = requests.getUserCredentials(getCursor(), userid)
         if password == userinfo[1]:
             session["userid"] = userid
-            subinfo = c.execute("SELECT firstname, lastname FROM Subscribers WHERE id == (?)", (userid,)).fetchone()
+            subinfo = requests.getUserNames(getCursor(), userid)
             if len(subinfo) > 0:
                 session["firstname"] = subinfo[0]
                 session["lastname"] = subinfo[1]
@@ -93,7 +97,7 @@ def register():
     if request.method == 'POST':
         c = get_db().cursor()
         r = request.form
-        maxSubID = c.execute("SELECT Max(id) FROM Subscribers").fetchone()[0]
+        maxSubID = requests.getMaxSubID(c)
         newUserID = maxSubID + 1
         expiryDate = datetime.today() + relativedelta(years=1)
 

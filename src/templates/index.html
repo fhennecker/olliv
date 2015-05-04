@@ -1,8 +1,8 @@
 {% extends '_master.html' %}
 
 {% block body %}
-    {% if logged == True %}
-        <h3>Hello {{ firstname + " " + lastname }}!</h3>
+    {% if "userid" in session  %}
+        <h3>Hello {{ session["firstname"] + " " + session["lastname"] }}!</h3>
         <a href="/stations">See the list of stations &gt;</a><br/>
         <a href="/logout">Logout &gt;</a>
     {% else %}
