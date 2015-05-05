@@ -58,11 +58,21 @@ def display_bike(bike_id):
     c = getCursor()
     bike = requests.getBike(c, bike_id)
     if bike.station != None:
-        # not in a trip, in a station
-        return redirect("/station/"+str(bike.station))
+        # not in a trip, starting one
+        requests.takeBike(getCursor(), get_db(), bike.id, session["userid"], bike.station.id)
+        session["isInTrip"] = True
     # in a trip
     lastTrip = requests.getLastTripForBike(c, bike_id)
     return render_template("trip.html", trip=lastTrip, bike=bike)
+
+@app.route('/drop/<station_id>')
+def drop_bike(station_id):
+    if "userid" in session and "isInTrip" in session and session["isInTrip"]:
+        c = getCursor()
+        lastTrip = requests.getLastTripForUser(c, session["userid"])
+        requests.dropBike(c, get_db(), lastTrip.startDate, session["userid"], station_id, lastTrip.bike)
+        session.pop("isInTrip", None)
+    return redirect("/station/"+station_id)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -90,6 +100,7 @@ def logout():
     session.pop('userid', None)
     session.pop('firstname', None)
     session.pop('lastname', None)
+    session.pop('isInTrip', None)
     return redirect("/")
 
 @app.route('/register', methods=['GET', 'POST'])

@@ -24,7 +24,7 @@ class Bike():
         self.commissionDate = None if "commissionDate" not in keys else row["commissionDate"] 
         self.model = "" if "model" not in keys else row["model"]
         self.state = None if "state" not in keys else row["state"]
-        self.station = None if "station" not in keys else row["station"]
+        self.station = None if ("station" not in keys or row["station"] == None) else Station({"id":row["station"]})
 
     def __str__(self):
         return "#"+str(self.id)+" - "+self.model+" ("+("OK" if self.state else "NOK") +")"

@@ -4,11 +4,16 @@
     <h1>{{ station.name.capitalize() }}</h1>
     {{ station }}
     <h3>Bikes</h3>
+    {% if session["isInTrip"] %}
+        <p><a class="button small radius" href="/drop/{{station.id}}">Drop your bike here</a> </p>
+    {% endif %}
     <ul>
         {% for bike in bikes %}
-            <li>{{ bike.id }} - <a href="/bike/{{ bike.id }}">Take it!</a></li>
+            <li>{{ bike.id }} 
+                {% if "userid" in session and not session["isInTrip"] %}
+                    - <a href="/bike/{{ bike.id }}">Take it!</a>
+                {% endif %}
+            </li>
         {% endfor %}
     </ul>
-{% endblock body %}
-
-
+{% endblock body %} 

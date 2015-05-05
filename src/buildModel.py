@@ -67,8 +67,8 @@ c.execute('''CREATE TABLE Subscribers(
 
 c.execute('''CREATE TABLE Trips(
                 user            INT UNSIGNED      NOT NULL,
-                startDate       DATETIME,
-                endDate         DATETIME,
+                startDate       TEXT,
+                endDate         TEXT,
                 startStation    INT UNSIGNED,
                 endStation      INT UNSIGNED,
                 bike            INT UNSIGNED,
