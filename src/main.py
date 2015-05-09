@@ -37,8 +37,7 @@ LANGUAGES = { 'en':'English', 'fr':'Francais' }
 
 @babel.localeselector
 def get_locale():
-    return 'fr'
-    #return request.accept_languages.best_match(LANGUAGES.keys())
+    return request.accept_languages.best_match(LANGUAGES.keys())
 
 
 ################################################################################
