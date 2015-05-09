@@ -1,5 +1,6 @@
 from DAO import Trip, Bike, Station
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 def getUserCredentials(c, userID):
     return c.execute("SELECT id, password FROM Users WHERE id == (?)", (userID,)).fetchone()
@@ -9,6 +10,18 @@ def getUserNames(c, userID):
 
 def getMaxSubID(c):
     return c.execute("SELECT Max(id) FROM Subscribers").fetchone()[0]
+
+def getMaxUserID(c):
+    return c.execute("SELECT Max(id) FROM Users").fetchone()[0]
+
+def buyTicket(c, db, days, password, card):
+    maxUID = getMaxUserID(c)
+    newUID = maxUID + 1
+    expiryDate = datetime.today() + relativedelta(days=days)
+    expiryDate = expiryDate.strftime("%Y-%m-%d %H:%M:%S")
+    c.execute("INSERT INTO Users VALUES (?, ?, ?, ?)", (newUID, password, expiryDate, card))
+    db.commit()
+    return newUID
 
 def getStationsList(c):
     return c.execute("SELECT id, name FROM Stations").fetchall()

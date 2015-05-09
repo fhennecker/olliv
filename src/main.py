@@ -74,6 +74,14 @@ def drop_bike(station_id):
         session.pop("isInTrip", None)
     return redirect("/station/"+station_id)
 
+@app.route('/tickets', methods=['GET', 'POST'])
+def show_tickets():
+    if request.method == 'POST':
+        r = request.form
+        newUserID = requests.buyTicket(getCursor(), get_db(), int(r["ticket"]), r["password"], r["card"])
+        render_template("tickets.html", )
+        return render_template("tickets.html", status="success", userid=newUserID)
+    return render_template("tickets.html", status="normal")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
