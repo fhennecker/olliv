@@ -1,16 +1,16 @@
 {% extends '_master.html' %}
 
 {% block body %}
-    {% if status == "failed" %} <p>Please retry</p> {% endif %}
+    {% if status == "failed" %} <p>{{ _('Please retry') }}</p> {% endif %}
     {% if status == "normal" %}
     <div class="row"><div class="columns large-4 medium-4 small-6 large-centered medium-centered small-centered">
         <form action="" method="post">
             <p><input type="text" name="userid"></p>
             <p><input type="password" name="password"></p>
-            <p><input type="submit" value="login" class="button"></p>        
+            <p><input type="submit" value="{{ _('Login') }}" class="button"></p>        
         </form>
     </div></div>
     {% endif %}
 
-    {% if status == "logged" %} <p>Already logged in! <a href="/logout">Logout</a></p> {% endif %}
+    {% if status == "logged" %} <p>{{ _('Already logged in!') }} <a href="/logout">{{ _('Logout') }}</a></p> {% endif %}
 {% endblock %}

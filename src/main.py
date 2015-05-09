@@ -1,9 +1,11 @@
 from flask import Flask, g, render_template, abort, session, redirect, url_for, escape, request
+from flask.ext.babel import Babel
 import sqlite3
 from DAO import Station, Bike, Trip
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import requests
+
 app = Flask(__name__)
 
 ################################################################################
@@ -25,6 +27,19 @@ def close_connection(exception):
 
 def getCursor():
     return get_db().cursor()
+
+
+################################################################################
+# Internationalization 
+babel = Babel(app)
+
+LANGUAGES = { 'en':'English', 'fr':'Francais' }
+
+@babel.localeselector
+def get_locale():
+    return 'fr'
+    #return request.accept_languages.best_match(LANGUAGES.keys())
+
 
 ################################################################################
 # Routes

@@ -2,12 +2,12 @@
 
 {% block body %}
     {% if "userid" in session  %}
-        <h3>Hello {{ session["firstname"] + " " + session["lastname"] }}!</h3>
-        <a href="/stations">See the list of stations &gt;</a><br/>
-        <a href="/logout">Logout &gt;</a>
+        <h3>{{ _('Hello') }} {{ session["firstname"] + " " + session["lastname"] }}!</h3>
+        <a href="/stations">{{ _('See the list of stations') }} &gt;</a><br/>
+        <a href="/logout">{{ _('Logout') }} &gt;</a>
     {% else %}
         <h3>Hello world!</h3>
-        <a href="/stations">See the list of stations &gt;</a><br/>
-        <a href="/login">Login &gt;</a>
+        <a href="/stations">{{ _('See the list of stations') }} &gt;</a><br/>
+        <a href="/login">{{ _('Login') }} &gt;</a>
     {% endif %}
 {% endblock %}

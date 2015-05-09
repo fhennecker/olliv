@@ -1,47 +1,47 @@
 {% extends '_master.html' %}
 
 {% block body %}
-    {% if status == "success" %} <h3>Welcome!</h3> <p>Your user ID is {{ userid }}. You'll need to log in with it so remember it!</p> {% endif %}
+    {% if status == "success" %} <h3>{{ _('Welcome!') }}</h3> <p>{{ _('Your user ID is') }} {{ userid }}. {{ _("You'll need to log in with it so remember it!") }}</p> {% endif %}
     {% if status == "normal" %}
     <div class="row"><div class="columns large-4 medium-4 small-6 large-centered medium-centered small-centered">
         <form action="" method="post" data-abide>
             <div class="firstname-field">
-                <input type="text" name="firstname" placeholder="First Name" required>
-                <small class="error">First Name is required</small>
+                <input type="text" name="firstname" placeholder="{{ _('First Name') }}" required>
+                <small class="error">{{ _('First Name is required') }}</small>
             </div>
             <div class="lastname-field">
-                <input type="text" name="lastname" placeholder="Last Name" required>
-                <small class="error">Last Name is required</small>
+                <input type="text" name="lastname" placeholder="{{ _('Last Name') }}" required>
+                <small class="error">{{ _('Last Name is required') }}</small>
             </div>
             <div class="password-field">
-                <input type="password" name="password" placeholder="Password (4-digit pin)" required pattern="^\d{4}$">
-                <small class="error">Password is required and must be a 4-digit pin</small>
+                <input type="password" name="password" placeholder="{{ _('Password (4-digit pin)') }}" required pattern="^\d{4}$">
+                <small class="error">{{ _('Password is required and must be a 4-digit pin') }}</small>
             </div>
             <div class="phone-field">
-                <input type="text" name="phone" placeholder="Phone (ex: 0478123456)" required pattern="^\d{10}$">
-                <small class="error">Phone number is required and must be a 10-digit number</small>
+                <input type="text" name="phone" placeholder="{{ _('Phone (ex: 0478123456)') }}" required pattern="^\d{10}$">
+                <small class="error">{{ _('Phone number is required and must be a 10-digit number') }}</small>
             </div>
             <div class="street-field">
-                <input type="text" name="street" placeholder="Street" required>
-                <small class="error">Street is required</small>
+                <input type="text" name="street" placeholder="{{ _('Street') }}" required>
+                <small class="error">{{ _('Street is required') }}</small>
             </div>
             <div class="number-field">
-                <input type="text" name="number" placeholder="Number" required>
-                <small class="error">Number is required</small>
+                <input type="text" name="number" placeholder="{{ _('Number') }}" required>
+                <small class="error">{{ _('Number is required') }}</small>
             </div>
             <div class="cp-field">
-                <input type="text" name="cp" placeholder="ZIP code" required>
-                <small class="error">ZIP code is required</small>
+                <input type="text" name="cp" placeholder="{{ _('ZIP code') }}" required>
+                <small class="error">{{ _('ZIP code is required') }}</small>
             </div>
             <div class="city-field">
-                <input type="text" name="city" placeholder="City" required>
-                <small class="error">City is required</small>
+                <input type="text" name="city" placeholder="{{ _('City') }}" required>
+                <small class="error">{{ _('City is required') }}</small>
             </div>
             <div class="card-field">
-                <input type="text" name="card" placeholder="Credit card number" required pattern="^\d{16}$">
-                <small class="error">Credit card number is required and must be a 16-digit number</small>
+                <input type="text" name="card" placeholder="{{ _('Credit card number') }}" required pattern="^\d{16}$">
+                <small class="error">{{ _('Credit card number is required and must be a 16-digit number') }}</small>
             </div>
-            <p><input type="submit" value="Register" class="button"></p>        
+            <p><input type="submit" value="{{ _('Register') }}" class="button"></p>        
         </form>
     </div></div>
     {% endif %}

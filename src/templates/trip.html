@@ -1,7 +1,7 @@
 {% extends '_master.html' %}
 
 {% block body %}
-    <h1>Bike {{ bike.id }} at station {{ bike.station }}</h1>
+    <h1>{{ _('Bike') }} {{ bike.id }} {{ _('at station') }} {{ bike.station }}</h1>
     {{ station }}
-    <h3>Duration : {{ trip.minutesSpent() }}, cost : {{ trip.cost() }}</h3>
+    <h3>{{ _('Duration') }} : {{ trip.minutesSpent() }}, {{ _('cost') }} : {{ trip.cost() }}</h3>
 {% endblock body %}

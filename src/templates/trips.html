@@ -9,13 +9,13 @@
                 ({{ trip.startDate }}) <i class="fa fa-bicycle"></i> 
                 <strong><a href="/station/{{trip.endStation.id}}">{{ trip.endStation.name }}</a></strong> 
                 ({{ trip.endDate }}) | 
-                <strong>{{ trip.minutesSpent() }}</strong> minutes, 
+                <strong>{{ trip.minutesSpent() }}</strong> {{ _('minutes') }}, 
                 <strong>{{ trip.cost() }}</strong>€
             </p>
         {% endfor %}
     {% else %}
         <div data-alert class="alert-box warning radius">
-            You must be logged in to view this page.
+            {{ _('You must be logged in to view this page.') }}
             <a href="#" class="close">&times;</a>
         </div>
     {% endif %}

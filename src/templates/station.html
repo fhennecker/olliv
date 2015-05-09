@@ -3,15 +3,15 @@
 {% block body %}
     <h1>{{ station.name.capitalize() }}</h1>
     {{ station }}
-    <h3>Bikes</h3>
+    <h3>{{ _('Bikes') }}</h3>
     {% if session["isInTrip"] %}
-        <p><a class="button small radius" href="/drop/{{station.id}}">Drop your bike here</a> </p>
+        <p><a class="button small radius" href="/drop/{{station.id}}">{{ _('Drop your bike here') }}</a> </p>
     {% endif %}
     <ul>
         {% for bike in bikes %}
             <li>{{ bike.id }} 
                 {% if "userid" in session and not session["isInTrip"] %}
-                    - <a href="/bike/{{ bike.id }}">Take it!</a>
+                    - <a href="/bike/{{ bike.id }}">{{ _('Take it') }}</a>
                 {% endif %}
             </li>
         {% endfor %}
