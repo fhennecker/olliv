@@ -33,7 +33,7 @@ c.execute('''CREATE TABLE Bikes(
                 id              MEDIUMINT UNSIGNED      NOT NULL,
                 commissionDate  DATE,
                 model           VARCHAR(64),
-                state           BOOLEAN,
+                state           TEXT,
                 station         INT UNSIGNED,
 
                 PRIMARY KEY (id),

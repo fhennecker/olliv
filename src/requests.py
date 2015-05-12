@@ -39,7 +39,7 @@ def getBike(c, id):
     return None
 
 def getBikesAtStation(c, stationID):
-    return map(Bike, c.execute("SELECT id FROM Bikes WHERE station = (?)", (stationID,)).fetchall())
+    return map(Bike, c.execute("SELECT id, state FROM Bikes WHERE station = (?)", (stationID,)).fetchall())
 
 def getLastTripForBike(c, bikeID):
     res = c.execute(""" SELECT Trips.* FROM Trips 
@@ -59,6 +59,11 @@ def getLastTripForUser(c, userID):
     if res:
         return Trip(res)
     return None
+
+def changeState(c, db, bikeID, state):
+    c.execute("UPDATE Bikes SET state = (?) WHERE id = (?)", (state, bikeID))
+    db.commit()
+ 
 
 def takeBike(c, db, bikeID, userID, startStationID):
     today = datetime.today().strftime("%Y-%m-%d %H:%M:%S")

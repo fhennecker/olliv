@@ -22,7 +22,7 @@ with open(BIKES_PATH, 'r') as f:
     for line in f.readlines()[1:] :
         number, commissionDate, model, state = line.strip().split(";")
         commissionDate = commissionDate.replace("T", " ")
-        c.execute("INSERT INTO Bikes VALUES (?, ?, ?, ?, ?)", (number, commissionDate, model, state, None))
+        c.execute("INSERT INTO Bikes VALUES (?, ?, ?, ?, ?)", (number, commissionDate, model, None, None))
 
 # importing users
 tree = ET.parse(USERS_PATH)

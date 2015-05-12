@@ -51,13 +51,19 @@ def display_stations():
     stations = requests.getStationsList(getCursor())
     return render_template("stations.html", stations=stations)
 
-@app.route('/station/<station_id>')
+@app.route('/station/<station_id>', methods = ['GET','POST'])
 def display_station(station_id):
     c = get_db().cursor()
+    if request.method == 'POST':
+        state = request.form["state"]
+        trip = requests.getLastTripForUser(getCursor(), session["userid"])
+        bikeID = trip.bike
+        requests.changeState(c, get_db(), bikeID, state)  
     station = requests.getStation(c, station_id)
     bikes = requests.getBikesAtStation(c, station_id)
     if station is None:
-        abort(404) 
+        abort(404)
+    
     return render_template("station.html", station=station, bikes=bikes)
 
 @app.route('/trips')

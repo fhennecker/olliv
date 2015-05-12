@@ -5,12 +5,16 @@
     {{ station }}
     <h3>{{ _('Bikes') }}</h3>
     {% if session["isInTrip"] %}
-        <p><a class="button small radius" href="/drop/{{station.id}}">{{ _('Drop your bike here') }}</a> </p>
+        <p><a class="button small radius" href="/drop/{{station.id}}">{{ _('Drop your bike here') }}</a> 
+	<form action="" method="post">
+            <p><input type="text" name="state"></p>
+            <p><input type="submit" value="{{ _('Complain') }}" class="button"></p>        
+        </form></p>
     {% endif %}
     <ul>
         {% for bike in bikes %}
             <li>{{ bike.id }} 
-                {% if "userid" in session and not session["isInTrip"] %}
+                {% if "userid" in session and not session["isInTrip"] and bike.state == None %}
                     - <a href="/bike/{{ bike.id }}">{{ _('Take it') }}</a>
                 {% endif %}
             </li>
