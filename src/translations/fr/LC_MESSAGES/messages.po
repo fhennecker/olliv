@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-05-12 17:40+0200\n"
+"POT-Creation-Date: 2015-05-13 15:13+0200\n"
 "PO-Revision-Date: 2015-05-09 21:56+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -21,23 +21,23 @@ msgstr ""
 msgid "Hello"
 msgstr "Bonjour"
 
-#: templates/_userinfo.html:3
+#: templates/_userinfo.html:6
 msgid "Stations"
 msgstr "Stations"
 
-#: templates/_userinfo.html:3
+#: templates/_userinfo.html:9
 msgid "My Trips"
 msgstr "Mes Voyages"
 
-#: templates/_userinfo.html:3 templates/index.html:7 templates/login.html:15
+#: templates/_userinfo.html:12 templates/index.html:7 templates/login.html:15
 msgid "Logout"
 msgstr "Déconnexion"
 
-#: templates/_userinfo.html:5 templates/index.html:11 templates/login.html:10
+#: templates/_userinfo.html:18 templates/index.html:11 templates/login.html:10
 msgid "Login"
 msgstr "Connexion"
 
-#: templates/_userinfo.html:5 templates/register.html:44
+#: templates/_userinfo.html:21 templates/register.html:44
 msgid "Register"
 msgstr "Inscription"
 
@@ -139,19 +139,27 @@ msgstr ""
 "Le numéro de carte de crédit est requis et doit être un nombre à 16 "
 "chiffres"
 
+#: templates/station.html:5
+msgid "free spots left"
+msgstr "emplacements libres restants"
+
 #: templates/station.html:6
 msgid "Bikes"
 msgstr "Vélos"
 
-#: templates/station.html:8
+#: templates/station.html:9
 msgid "Drop your bike here"
 msgstr "Déposez votre vélo ici"
 
-#: templates/station.html:11
+#: templates/station.html:12
 msgid "Complain"
 msgstr "Signaler un problème"
 
-#: templates/station.html:18
+#: templates/station.html:16
+msgid "This station is full!"
+msgstr "Cette station est pleine!"
+
+#: templates/station.html:25
 msgid "Take it"
 msgstr "Emmenez-le"
 

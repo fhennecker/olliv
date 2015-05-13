@@ -91,9 +91,10 @@ def display_bike(bike_id):
 def drop_bike(station_id):
     if "userid" in session and "isInTrip" in session and session["isInTrip"]:
         c = getCursor()
-        lastTrip = requests.getLastTripForUser(c, session["userid"])
-        requests.dropBike(c, get_db(), lastTrip.startDate, session["userid"], station_id, lastTrip.bike)
-        session.pop("isInTrip", None)
+        if requests.freeSpotsAtStation(c, station_id) > 0:
+            lastTrip = requests.getLastTripForUser(c, session["userid"])
+            requests.dropBike(c, get_db(), lastTrip.startDate, session["userid"], station_id, lastTrip.bike)
+            session.pop("isInTrip", None)
     return redirect("/station/"+station_id)
 
 @app.route('/tickets', methods=['GET', 'POST'])

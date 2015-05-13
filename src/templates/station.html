@@ -5,11 +5,18 @@
     {{ station }} - ({{freespots}} {{_('free spots left')}})
     <h3>{{ _('Bikes') }}</h3>
     {% if session["isInTrip"] %}
+        {% if freespots > 0 %}
         <p><a class="button small radius" href="/drop/{{station.id}}">{{ _('Drop your bike here') }}</a> 
 	<form action="" method="post">
             <p><input type="text" name="state"></p>
             <p><input type="submit" value="{{ _('Complain') }}" class="button"></p>        
         </form></p>
+        {% else %}
+            <div data-alert class="alert-box warning radius">
+                {{ _('This station is full!') }}
+                <a href="#" class="close">&times;</a>
+            </div>
+        {% endif %}
     {% endif %}
     <ul>
         {% for bike in bikes %}
