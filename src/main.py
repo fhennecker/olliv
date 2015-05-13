@@ -57,12 +57,18 @@ def display_stations():
 @app.route('/station/<station_id>', methods = ['GET','POST'])
 def display_station(station_id):
     c = get_db().cursor()
-    if request.method == 'POST':
-        state = request.form["state"]
-        trip = requests.getLastTripForUser(getCursor(), session["userid"])
-        bikeID = trip.bike
-        requests.changeState(c, get_db(), bikeID, state)  
     station = requests.getStation(c, station_id)
+    print station.payTerminal
+    if request.method == 'POST':
+        if request.form["diff"] == "complain":
+            state = request.form["state"]
+            trip = requests.getLastTripForUser(getCursor(), session["userid"])
+            bikeID = trip.bike
+            requests.changeState(c, get_db(), bikeID, state)  
+        if request.form["diff"] == "ticket":
+            r = request.form
+            newUserID = requests.buyTicket(getCursor(), get_db(), int(r["ticket"]), r["password"], r["card"])
+            return render_template("welcome.html", station=station, ticketid=newUserID)
     bikes = requests.getBikesAtStation(c, station_id)
     if station is None:
         abort(404)
@@ -97,15 +103,6 @@ def drop_bike(station_id):
             requests.dropBike(c, get_db(), lastTrip.startDate, session["userid"], station_id, lastTrip.bike)
             session.pop("isInTrip", None)
     return redirect("/station/"+station_id)
-
-@app.route('/tickets', methods=['GET', 'POST'])
-def show_tickets():
-    if request.method == 'POST':
-        r = request.form
-        newUserID = requests.buyTicket(getCursor(), get_db(), int(r["ticket"]), r["password"], r["card"])
-        render_template("tickets.html", )
-        return render_template("tickets.html", status="success", userid=newUserID)
-    return render_template("tickets.html", status="normal")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

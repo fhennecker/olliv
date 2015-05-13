@@ -8,6 +8,7 @@
         {% if freespots > 0 %}
         <p><a class="button small radius" href="/drop/{{station.id}}">{{ _('Drop your bike here') }}</a> 
 	<form action="" method="post">
+            <input type="hidden" name="diff" value="complain">
             <p><input type="text" name="state"></p>
             <p><input type="submit" value="{{ _('Complain') }}" class="button"></p>        
         </form></p>
@@ -18,6 +19,11 @@
             </div>
         {% endif %}
     {% endif %}
+
+    {% if ("userid" not in session) and station.payTerminal %}
+        {% include '_tickets.html' %}
+    {% endif %}
+
     <ul>
         {% for bike in bikes %}
             <li>{{ bike.id }} 

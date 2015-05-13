@@ -1,0 +1,17 @@
+{% extends '_master.html' %}
+
+{% block body %}
+
+    <h3>{{ _('Welcome!') }}</h3> 
+    {% if ticketid %}
+        <p>{{ _('Your ticket ID is') }} {{ ticketid }}. {{ _("You'll need to log in with it so remember it!") }}</p>
+    {% endif %}
+    {% if userid %}
+        <p>{{ _('Your user ID is') }} {{ userid }}. {{ _("You'll need to log in with it so remember it!") }}</p>
+    {% endif %}
+
+    {% if station %}
+        <p><a class="small button radius" href="/station/{{station.id}}">{{ _('Return to') }} {{station.name}}</a></p>
+    {% endif %}
+
+{% endblock %}

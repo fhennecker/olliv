@@ -9,7 +9,7 @@ class Station(object):
         keys = row.keys() # the rows 
         self.id = -1 if "id" not in keys else row["id"]
         self.name = "" if "name" not in keys else row["name"] 
-        self.payTerminal = None if "payTerminal" not in keys else row["payTerminal"]
+        self.payTerminal = None if "payTerminal" not in keys else (True if row["payTerminal"] == "True" else False)
         self.capacity = 0 if "capacity" not in keys else row["capacity"]
         self.gpsx = -1 if "gpsx" not in keys else row["gpsx"]
         self.gpsy = -1 if "gpsy" not in keys else row["gpsy"]
