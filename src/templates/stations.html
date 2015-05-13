@@ -1,11 +1,24 @@
 {% extends '_master.html' %}
 
 {% block body %}
-    <ul>
-        {% for station in stations %}
-            <li><a href="/station/{{ station[0] }}">{{ station[1].capitalize() }}</a></li>
-        {% endfor %}
-    </ul>
+    <div id="map-canvas"></div>
+
+
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCvopfSWj9_vO_cutkYeu427S2sXr8XHc">
+    </script>
+    <script type="text/javascript">
+        function initialize() {
+            var mapOptions = {
+                center: new google.maps.LatLng(50.848737,4.3494719),
+                zoom: 12
+            };
+            var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+            {% include '_stationsMapMarkers.html' %}
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+        
+    </script>
 {% endblock %}
 
 

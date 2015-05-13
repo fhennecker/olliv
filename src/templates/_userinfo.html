@@ -1,13 +1,13 @@
 <div class="row"> <div class="columns large-12 medium-12 small-12">
     {% if "firstname" in session %}
-        <p>{{ _('Hello') }}, {{ session["firstname"] + " " + session["lastname"] }} 
+        <p>{{ _('Hello') }}, {{ session["firstname"] + " " + session["lastname"]}} 
 
             <a href="/stations" class="sbbutton">
                 <i class="fa fa-map-marker"></i> &nbsp;{{ _('Stations') }}
-            </a> 
+            </a>
             <a href="/trips" class="sbbutton">
                 <i class="fa fa-bicycle"></i> &nbsp;{{ _('My Trips') }}
-            </a> 
+            </a>
             <a href="/logout" class="sbbutton">
                 <i class="fa fa-sign-out"></i> &nbsp;{{ _('Logout') }}
             </a>

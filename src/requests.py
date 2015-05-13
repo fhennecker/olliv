@@ -24,7 +24,7 @@ def buyTicket(c, db, days, password, card):
     return newUID
 
 def getStationsList(c):
-    return c.execute("SELECT id, name FROM Stations").fetchall()
+    return c.execute("SELECT id, name, gpsx, gpsy FROM Stations").fetchall()
 
 def getStation(c, id):
     res = c.execute("SELECT * FROM Stations WHERE id = (?)", (id,)).fetchone()
