@@ -1,6 +1,6 @@
 <div class="row"> <div class="columns large-12 medium-12 small-12">
     {% if "firstname" in session %}
-        <p>{{ _('Hello') }}, {{ session["firstname"] + " " + session["lastname"]}} 
+        <p><span class="hellouser">{{ _('Hello') }} {{ session["firstname"]}}! </span>
 
             <a href="/stations" class="sbbutton">
                 <i class="fa fa-map-marker"></i> &nbsp;{{ _('Stations') }}

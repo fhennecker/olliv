@@ -25,7 +25,7 @@
 
 /* -------------------------------------------------------------------------- */
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'montserrat';
     font-weight: bold;
     color:#333;
@@ -78,3 +78,12 @@ header {
     color:#ecc800;
     border-left:5px solid #ecc800;
 }
+
+.hellouser{
+    font-family: "montserrat";
+    color:#666;
+    font-size: 13pt;
+    font-weight: bold;
+    /*text-shadow:1px 1px 1px rgba(0,0,0,0.5);*/
+}
+
