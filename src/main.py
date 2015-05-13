@@ -63,6 +63,8 @@ def display_station(station_id):
     if request.method == 'POST':
         if request.form["diff"] == "complain":
             state = request.form["state"]
+            if len(state) == 0:
+                state = "Problem not specified"
             trip = requests.getLastTripForUser(getCursor(), session["userid"])
             bikeID = trip.bike
             requests.changeState(c, get_db(), bikeID, state)  
