@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-05-13 15:13+0200\n"
+"POT-Creation-Date: 2015-05-13 19:13+0200\n"
 "PO-Revision-Date: 2015-05-09 21:56+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -17,11 +17,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
+#: templates/_tickets.html:5
+msgid "1-day ticket"
+msgstr "Ticket une journée"
+
+#: templates/_tickets.html:6
+msgid "7-day ticket"
+msgstr "Ticket une semaine"
+
+#: templates/_tickets.html:10 templates/register.html:22
+msgid "Password is required and must be a 4-digit pin"
+msgstr "Le mot de passe est requis et doit être un nombre à 4 chiffres"
+
+#: templates/_tickets.html:14 templates/register.html:46
+msgid "Credit card number is required and must be a 16-digit number"
+msgstr ""
+"Le numéro de carte de crédit est requis et doit être un nombre à 16 "
+"chiffres"
+
 #: templates/_userinfo.html:3 templates/index.html:5
 msgid "Hello"
 msgstr "Bonjour"
 
-#: templates/_userinfo.html:6
+#: templates/_userinfo.html:6 templates/_userinfo.html:18
 msgid "Stations"
 msgstr "Stations"
 
@@ -29,15 +47,15 @@ msgstr "Stations"
 msgid "My Trips"
 msgstr "Mes Voyages"
 
-#: templates/_userinfo.html:12 templates/index.html:7 templates/login.html:15
+#: templates/_userinfo.html:12 templates/index.html:7
 msgid "Logout"
 msgstr "Déconnexion"
 
-#: templates/_userinfo.html:18 templates/index.html:11 templates/login.html:10
+#: templates/_userinfo.html:21 templates/index.html:11 templates/login.html:20
 msgid "Login"
 msgstr "Connexion"
 
-#: templates/_userinfo.html:21 templates/register.html:44
+#: templates/_userinfo.html:24 templates/register.html:48
 msgid "Register"
 msgstr "Inscription"
 
@@ -45,99 +63,77 @@ msgstr "Inscription"
 msgid "See the list of stations"
 msgstr "Voir la liste des stations"
 
-#: templates/login.html:4
+#: templates/login.html:6 templates/register.html:6
+msgid "You are already connected"
+msgstr "Vous êtes déjà connecté"
+
+#: templates/login.html:13
 msgid "Please retry"
 msgstr "Veuillez réessayer"
 
-#: templates/login.html:15
-msgid "Already logged in!"
-msgstr "Vous êtes déjà connecté"
-
-#: templates/register.html:4
-msgid "Welcome!"
-msgstr "Bienvenue!"
-
-#: templates/register.html:4
-msgid "Your user ID is"
-msgstr "Votre numéro d'utilisateur est le"
-
-#: templates/register.html:4
-msgid "You'll need to log in with it so remember it!"
-msgstr "Vous devrez l'utiliser pour vous connecter, souvenez-vous en!"
-
-#: templates/register.html:9
+#: templates/register.html:13
 msgid "First Name"
 msgstr "Prénom"
 
-#: templates/register.html:10
+#: templates/register.html:14
 msgid "First Name is required"
 msgstr "Le prénom est requis"
 
-#: templates/register.html:13
+#: templates/register.html:17
 msgid "Last Name"
 msgstr "Nom"
 
-#: templates/register.html:14
+#: templates/register.html:18
 msgid "Last Name is required"
 msgstr "Le nom est requis"
 
-#: templates/register.html:17
+#: templates/register.html:21
 msgid "Password (4-digit pin)"
 msgstr "Mot de passe (4 chiffres)"
 
-#: templates/register.html:18
-msgid "Password is required and must be a 4-digit pin"
-msgstr "Le mot de passe est requis et doit être un nombre à 4 chiffres"
-
-#: templates/register.html:21
+#: templates/register.html:25
 msgid "Phone (ex: 0478123456)"
 msgstr "Téléphone (ex: 078123456)"
 
-#: templates/register.html:22
+#: templates/register.html:26
 msgid "Phone number is required and must be a 10-digit number"
 msgstr "Le numéro de téléphone est requis et doit être un nombre à 10 chiffres"
 
-#: templates/register.html:25
+#: templates/register.html:29
 msgid "Street"
 msgstr "Rue"
 
-#: templates/register.html:26
+#: templates/register.html:30
 msgid "Street is required"
 msgstr "La rue est requise"
 
-#: templates/register.html:29
+#: templates/register.html:33
 msgid "Number"
 msgstr "Numéro"
 
-#: templates/register.html:30
+#: templates/register.html:34
 msgid "Number is required"
 msgstr "Le numéro est requis"
 
-#: templates/register.html:33
+#: templates/register.html:37
 msgid "ZIP code"
 msgstr "Code postal"
 
-#: templates/register.html:34
+#: templates/register.html:38
 msgid "ZIP code is required"
 msgstr "Le code postal est requis"
 
-#: templates/register.html:37
+#: templates/register.html:41
 msgid "City"
 msgstr "Ville"
 
-#: templates/register.html:38
+#: templates/register.html:42
 msgid "City is required"
 msgstr "La ville est requise"
 
-#: templates/register.html:41
+#: templates/register.html:45
 msgid "Credit card number"
 msgstr "Numéro de carte de crédit"
-
-#: templates/register.html:42
-msgid "Credit card number is required and must be a 16-digit number"
-msgstr ""
-"Le numéro de carte de crédit est requis et doit être un nombre à 16 "
-"chiffres"
 
 #: templates/station.html:5
 msgid "free spots left"
@@ -151,15 +147,15 @@ msgstr "Vélos"
 msgid "Drop your bike here"
 msgstr "Déposez votre vélo ici"
 
-#: templates/station.html:12
+#: templates/station.html:13
 msgid "Complain"
 msgstr "Signaler un problème"
 
-#: templates/station.html:16
+#: templates/station.html:17
 msgid "This station is full!"
 msgstr "Cette station est pleine!"
 
-#: templates/station.html:25
+#: templates/station.html:31
 msgid "Take it"
 msgstr "Emmenez-le"
 
@@ -186,4 +182,27 @@ msgstr "minutes"
 #: templates/trips.html:18
 msgid "You must be logged in to view this page."
 msgstr "Vous devez être connecté pour voir cette page"
+
+#: templates/welcome.html:5
+msgid "Welcome!"
+msgstr "Bienvenue!"
+
+#: templates/welcome.html:7
+msgid "Your ticket ID is"
+msgstr "Votre numéro de ticket est"
+
+#: templates/welcome.html:7 templates/welcome.html:10
+msgid "You'll need to log in with it so remember it!"
+msgstr "Vous devrez l'utiliser pour vous connecter, souvenez-vous en!"
+
+#: templates/welcome.html:10
+msgid "Your user ID is"
+msgstr "Votre numéro d'utilisateur est le"
+
+#: templates/welcome.html:14
+msgid "Return to"
+msgstr "Revenir à"
+
+#~ msgid "Already logged in!"
+#~ msgstr "Vous êtes déjà connecté"
 
