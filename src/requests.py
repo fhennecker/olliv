@@ -1,6 +1,7 @@
 from DAO import Trip, Bike, Station
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+from random import randint
 
 def getUserCredentials(c, userID):
     return c.execute("SELECT id, password FROM Users WHERE id == (?)", (userID,)).fetchone()
@@ -22,6 +23,36 @@ def buyTicket(c, db, days, password, card):
     c.execute("INSERT INTO Users VALUES (?, ?, ?, ?)", (newUID, password, expiryDate, card))
     db.commit()
     return newUID
+
+def registerUser(c, db, form):
+    r = form
+    maxSubID = getMaxSubID(c)
+    newUserID = maxSubID + 1
+    expiryDate = datetime.today() + relativedelta(years=1)
+    expiryDate = expiryDate.strftime("%Y-%m-%d %H:%M:%S")
+    rfid = "".join([str(randint(0,9)) for i in range(20)]) # random 20-char RFID generator
+
+    c.execute("INSERT INTO Users VALUES (?, ?, ?, ?)", (newUserID, r["password"], expiryDate, r["card"]))
+    inserted = False
+    while not inserted:
+        try:
+            c.execute("INSERT INTO Subscribers VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
+                                                        (newUserID,\
+                                                        rfid,\
+                                                        r["lastname"],\
+                                                        r["firstname"],\
+                                                        r["city"],\
+                                                        r["cp"],\
+                                                        r["street"],\
+                                                        r["number"],\
+                                                        datetime.today().strftime("%Y-%m-%d %H:%M:%S"),\
+                                                        r["phone"]))
+            inserted = True
+        except sqlite3.IntegrityError:
+            # random rfid has a very small chance of colliding with an already existing rfid
+            rfid = "".join([str(randint(0,9)) for i in range(20)])
+    db.commit()
+    return newUserID
 
 def getStationsList(c):
     return c.execute("SELECT id, name, gpsx, gpsy FROM Stations").fetchall()

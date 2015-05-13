@@ -51,3 +51,6 @@ def isTicketFormValid(form):
     if not validLengthDigit(form["card"], 16):
         return False
     return True
+
+def isInTrip(session):
+    return "userid" in session and "isInTrip" in session and session["isInTrip"] 
