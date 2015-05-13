@@ -1,46 +1,52 @@
 {% extends '_master.html' %}
 
 {% block body %}
-
-    <div class="row"><div class="columns large-4 medium-4 small-6 large-centered medium-centered small-centered">
-        <form action="" method="post" data-abide>
-            <div class="firstname-field">
-                <input type="text" name="firstname" placeholder="{{ _('First Name') }}" required>
-                <small class="error">{{ _('First Name is required') }}</small>
-            </div>
-            <div class="lastname-field">
-                <input type="text" name="lastname" placeholder="{{ _('Last Name') }}" required>
-                <small class="error">{{ _('Last Name is required') }}</small>
-            </div>
-            <div class="password-field">
-                <input type="password" name="password" placeholder="{{ _('Password (4-digit pin)') }}" required pattern="^\d{4}$">
-                <small class="error">{{ _('Password is required and must be a 4-digit pin') }}</small>
-            </div>
-            <div class="phone-field">
-                <input type="text" name="phone" placeholder="{{ _('Phone (ex: 0478123456)') }}" required pattern="^\d{10}$">
-                <small class="error">{{ _('Phone number is required and must be a 10-digit number') }}</small>
-            </div>
-            <div class="street-field">
-                <input type="text" name="street" placeholder="{{ _('Street') }}" required>
-                <small class="error">{{ _('Street is required') }}</small>
-            </div>
-            <div class="number-field">
-                <input type="text" name="number" placeholder="{{ _('Number') }}" required>
-                <small class="error">{{ _('Number is required') }}</small>
-            </div>
-            <div class="cp-field">
-                <input type="text" name="cp" placeholder="{{ _('ZIP code') }}" required>
-                <small class="error">{{ _('ZIP code is required') }}</small>
-            </div>
-            <div class="city-field">
-                <input type="text" name="city" placeholder="{{ _('City') }}" required>
-                <small class="error">{{ _('City is required') }}</small>
-            </div>
-            <div class="card-field">
-                <input type="text" name="card" placeholder="{{ _('Credit card number') }}" required pattern="^\d{16}$">
-                <small class="error">{{ _('Credit card number is required and must be a 16-digit number') }}</small>
-            </div>
-            <p><input type="submit" value="{{ _('Register') }}" class="button"></p>        
-        </form>
-    </div></div>
+    {% if "userid" in session %}
+        <div data-alert class="alert-box info radius">
+          {{ _('You are already connected') }}
+          <a href="#" class="close">&times;</a>
+        </div>
+    {% else %}
+        <div class="row"><div class="columns large-4 medium-4 small-6 large-centered medium-centered small-centered">
+            <form action="" method="post" data-abide>
+                <div class="firstname-field">
+                    <input type="text" name="firstname" placeholder="{{ _('First Name') }}" required>
+                    <small class="error">{{ _('First Name is required') }}</small>
+                </div>
+                <div class="lastname-field">
+                    <input type="text" name="lastname" placeholder="{{ _('Last Name') }}" required>
+                    <small class="error">{{ _('Last Name is required') }}</small>
+                </div>
+                <div class="password-field">
+                    <input type="password" name="password" placeholder="{{ _('Password (4-digit pin)') }}" required pattern="^\d{4}$">
+                    <small class="error">{{ _('Password is required and must be a 4-digit pin') }}</small>
+                </div>
+                <div class="phone-field">
+                    <input type="text" name="phone" placeholder="{{ _('Phone (ex: 0478123456)') }}" required pattern="^\d{10}$">
+                    <small class="error">{{ _('Phone number is required and must be a 10-digit number') }}</small>
+                </div>
+                <div class="street-field">
+                    <input type="text" name="street" placeholder="{{ _('Street') }}" required>
+                    <small class="error">{{ _('Street is required') }}</small>
+                </div>
+                <div class="number-field">
+                    <input type="text" name="number" placeholder="{{ _('Number') }}" required>
+                    <small class="error">{{ _('Number is required') }}</small>
+                </div>
+                <div class="cp-field">
+                    <input type="text" name="cp" placeholder="{{ _('ZIP code') }}" required>
+                    <small class="error">{{ _('ZIP code is required') }}</small>
+                </div>
+                <div class="city-field">
+                    <input type="text" name="city" placeholder="{{ _('City') }}" required>
+                    <small class="error">{{ _('City is required') }}</small>
+                </div>
+                <div class="card-field">
+                    <input type="text" name="card" placeholder="{{ _('Credit card number') }}" required pattern="^\d{16}$">
+                    <small class="error">{{ _('Credit card number is required and must be a 16-digit number') }}</small>
+                </div>
+                <p><input type="submit" value="{{ _('Register') }}" class="button"></p>        
+            </form>
+        </div></div>
+    {% endif %}
 {% endblock %}
