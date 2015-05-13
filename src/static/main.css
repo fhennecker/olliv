@@ -1,3 +1,71 @@
+@font-face {
+    font-family: 'montserrat';
+    src: url('fonts/Montserrat-Regular.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'montserrat';
+    src: url('fonts/Montserrat-Black.otf') format('truetype');
+    font-weight: bolder;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'montserrat';
+    src: url('fonts/Montserrat-Bold.otf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'montserrat';
+    src: url('fonts/Montserrat-Light.otf') format('truetype');
+    font-weight:lighter;
+    font-style: normal;
+}
+
+/* -------------------------------------------------------------------------- */
+
+h1 {
+    font-family: 'montserrat';
+    font-weight: bold;
+    color:#333;
+}
+
 body {
-    padding:20px;
+    background-color: #ffd200;
+    padding-bottom:25px;
+}
+
+header {
+    margin-bottom:25px !important;
+    height:200px;
+    background-image: url('banner.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+
+.main {
+    background-color: #FFF;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    padding:15px;
+}
+
+#map-canvas {
+    width:100%;
+    height:500px;
+}
+
+.sbbutton {
+    font-family: "montserrat";
+    font-size: 15pt;
+    display: block;
+    width:100%;
+    margin-bottom:5px;
+    color:white;
+    text-shadow:1px 1px 1px rgba(0,0,0,0.2);
+}
+.sbbutton:hover{
+    color:#ffefa4;
 }

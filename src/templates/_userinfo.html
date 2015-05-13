@@ -1,7 +1,18 @@
 <div class="row"> <div class="columns large-12 medium-12 small-12">
     {% if "firstname" in session %}
-        <p>{{ _('Hello') }}, {{ session["firstname"] + " " + session["lastname"] }} <a href="/stations" class="small radius button">{{ _('Stations') }}</a> <a href="/trips" class="small radius button">{{ _('My Trips') }}</a> <a href="/logout" class="small radius button alert">{{ _('Logout') }} &gt;</a></p>
+        <p>{{ _('Hello') }}, {{ session["firstname"] + " " + session["lastname"] }} 
+
+            <a href="/stations" class="sbbutton">
+                <i class="fa fa-map-marker"></i> &nbsp;{{ _('Stations') }}
+            </a> 
+            <a href="/trips" class="sbbutton">
+                <i class="fa fa-bicycle"></i> &nbsp;{{ _('My Trips') }}
+            </a> 
+            <a href="/logout" class="sbbutton">
+                <i class="fa fa-sign-out"></i> &nbsp;{{ _('Logout') }}
+            </a>
+        </p>
     {% else %}
-        <p><a href="/login" class="small radius button">{{ _('Login') }}</a> <a href="/register" class="small radius button secondary">{{ _('Register') }}</a></p>
+        <p><a href="/login" class="sbbutton">{{ _('Login') }}</a> <a href="/register" class="sbbutton">{{ _('Register') }}</a></p>
     {% endif %}
 </div> </div>
