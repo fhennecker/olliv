@@ -117,6 +117,9 @@ def login():
             if len(subinfo) > 0:
                 session["firstname"] = subinfo[0]
                 session["lastname"] = subinfo[1]
+                lastTrip = requests.getLastTripForUser(getCursor(), userid)
+                if lastTrip and lastTrip.endStation.id == None:
+                    session["isInTrip"] = True
             return redirect("/")
         else:
             return render_template("login.html", status="failed")
