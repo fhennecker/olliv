@@ -117,12 +117,17 @@ def login():
         if password == userinfo[1]:
             session["userid"] = userid
             subinfo = requests.getUserNames(getCursor(), userid)
-            if len(subinfo) > 0:
+            session["firstname"] = ""
+            session["lastname"] = ""
+            if subinfo and len(subinfo) > 0: # if user is a subscriber
                 session["firstname"] = subinfo[0]
                 session["lastname"] = subinfo[1]
-                lastTrip = requests.getLastTripForUser(getCursor(), userid)
-                if lastTrip and lastTrip.endStation.id == None:
-                    session["isInTrip"] = True
+            lastTrip = requests.getLastTripForUser(getCursor(), userid)
+            print lastTrip
+            if lastTrip and lastTrip.endStation.id == None:
+                session["isInTrip"] = True
+            else:
+                session["isInTrip"] = False
             return redirect("/")
         else:
             return render_template("login.html", status="failed")

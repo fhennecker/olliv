@@ -60,7 +60,7 @@ def getTripsForUserID(c, userID):
 
 def getLastTripForUser(c, userID):
     res = c.execute("""SELECT *, Max(startDate) FROM Trips WHERE user = (?)""", (userID,)).fetchone()
-    if res:
+    if res and res["bike"] != None:
         return Trip(res)
     return None
 
