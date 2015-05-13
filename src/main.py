@@ -70,8 +70,9 @@ def display_station(station_id):
             requests.changeState(c, get_db(), bikeID, state)  
         if request.form["diff"] == "ticket" and station.payTerminal:
             r = request.form
-            newUserID = requests.buyTicket(getCursor(), get_db(), int(r["ticket"]), r["password"], r["card"])
-            return render_template("welcome.html", station=station, ticketid=newUserID)
+            if helpers.isTicketFormValid(r):
+                newUserID = requests.buyTicket(getCursor(), get_db(), int(r["ticket"]), r["password"], r["card"])
+                return render_template("welcome.html", station=station, ticketid=newUserID)
     bikes = requests.getBikesAtStation(c, station_id)
     if station is None:
         abort(404)
