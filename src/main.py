@@ -65,7 +65,7 @@ def display_station(station_id):
             trip = requests.getLastTripForUser(getCursor(), session["userid"])
             bikeID = trip.bike
             requests.changeState(c, get_db(), bikeID, state)  
-        if request.form["diff"] == "ticket":
+        if request.form["diff"] == "ticket" and station.payTerminal:
             r = request.form
             newUserID = requests.buyTicket(getCursor(), get_db(), int(r["ticket"]), r["password"], r["card"])
             return render_template("welcome.html", station=station, ticketid=newUserID)
