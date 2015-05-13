@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>{{ station.name.capitalize() }}</h1>
-    {{ station }}
+    {{ station }} - ({{freespots}} {{_('free spots left')}})
     <h3>{{ _('Bikes') }}</h3>
     {% if session["isInTrip"] %}
         <p><a class="button small radius" href="/drop/{{station.id}}">{{ _('Drop your bike here') }}</a> 

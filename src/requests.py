@@ -32,6 +32,10 @@ def getStation(c, id):
         return Station(res)
     return None
 
+def freeSpotsAtStation(c, id):
+    return c.execute("""SELECT (SELECT capacity FROM Stations WHERE id = (?))
+                                - (SELECT Count(*) FROM Bikes WHERE station = (?)) """, (id, id)).fetchone()[0]
+
 def getBike(c, id):
     res = c.execute("SELECT * FROM Bikes WHERE id == (?)", (id,)).fetchone()
     if res:

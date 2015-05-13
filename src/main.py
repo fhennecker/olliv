@@ -65,8 +65,8 @@ def display_station(station_id):
     bikes = requests.getBikesAtStation(c, station_id)
     if station is None:
         abort(404)
-    
-    return render_template("station.html", station=station, bikes=bikes)
+    freespots = requests.freeSpotsAtStation(c, station_id)
+    return render_template("station.html", station=station, bikes=bikes, freespots=freespots)
 
 @app.route('/trips')
 def display_trips():
