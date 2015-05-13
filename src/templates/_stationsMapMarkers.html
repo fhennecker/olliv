@@ -1,0 +1,16 @@
+var infoWindow = new google.maps.InfoWindow({
+    
+});
+
+{% for station in stations %}
+    var marker{{station.id}} = new google.maps.Marker({
+        position: new google.maps.LatLng({{station.gpsy}}, {{station.gpsx}}),
+        map: map,
+        title: '{{station.name}}'
+    });
+    var html{{station.id}} = '<h5><a href="/station/{{station.id}}">{{station.name}}</a></h5>'
+    google.maps.event.addListener(marker{{station.id}}, 'click', function() {
+        infoWindow.setContent(html{{station.id}});
+        infoWindow.open(map, marker{{station.id}});
+    });
+{% endfor %} 
