@@ -13,6 +13,13 @@
             </a>
         </p>
     {% else %}
-        <p><a href="/login" class="sbbutton">{{ _('Login') }}</a> <a href="/register" class="sbbutton">{{ _('Register') }}</a></p>
+        <p>
+            <a href="/login" class="sbbutton">
+                <i class="fa fa-sign-in"></i> &nbsp;{{ _('Login') }}
+            </a>
+            <a href="/register" class="sbbutton">
+                <i class="fa fa-user"></i> &nbsp;{{ _('Register') }}
+            </a>
+        </p>
     {% endif %}
 </div> </div>

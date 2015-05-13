@@ -65,7 +65,13 @@ header {
     margin-bottom:5px;
     color:white;
     text-shadow:1px 1px 1px rgba(0,0,0,0.2);
+    border-left:0px solid white;
+    transition: all 0.2s;
+}
+.sbbutton i {
+    margin-left:5px;
 }
 .sbbutton:hover{
     color:#ffefa4;
+    border-left:5px solid #ffefa4;
 }
