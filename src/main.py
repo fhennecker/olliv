@@ -145,7 +145,7 @@ def register():
         newUserID = maxSubID + 1
         expiryDate = datetime.today() + relativedelta(years=1)
         expiryDate = expiryDate.strftime("%Y-%m-%d %H:%M:%S")
-        rfid = "".join([str(rand(0,9)) for i in range(20)]) # random 20-char RFID generator
+        rfid = "".join([str(randint(0,9)) for i in range(20)]) # random 20-char RFID generator
 
         c.execute("INSERT INTO Users VALUES (?, ?, ?, ?)", (newUserID, r["password"], expiryDate, r["card"]))
         inserted = False
