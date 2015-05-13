@@ -37,6 +37,8 @@ LANGUAGES = { 'en':'English', 'fr':'Francais' }
 
 @babel.localeselector
 def get_locale():
+    if "language" in session:
+        return session["language"]
     return request.accept_languages.best_match(LANGUAGES.keys())
 
 
@@ -146,6 +148,12 @@ def register():
         return render_template("register.html", status="success", userid=newUserID)
     else:
         return render_template("register.html", status="normal")
+
+@app.route('/language/<language>')
+def select_language(language):
+    if language in ['fr', 'en']:
+        session["language"] = language
+    return redirect('/')
 
 if __name__ == '__main__':
     app.debug = True
