@@ -123,8 +123,6 @@ def login():
             return redirect("/")
         else:
             return render_template("login.html", status="failed")
-    if "userid" in session:
-        return render_template("login.html", status="logged")
     return render_template("login.html", status="normal")
 
 @app.route('/logout')
