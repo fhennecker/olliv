@@ -32,23 +32,25 @@ h1 {
 }
 
 body {
-    background-color: #ffd200;
+    background-color: #EEE;
     padding-bottom:25px;
 }
 
 header {
     margin-bottom:25px !important;
-    height:200px;
+    height:208px;
     background-image: url('banner.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    border-bottom:8px solid #ffd200;
+    cursor:pointer;
 }
 
 .main {
     background-color: #FFF;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     padding:15px;
 }
 
@@ -63,15 +65,16 @@ header {
     display: block;
     width:100%;
     margin-bottom:5px;
-    color:white;
-    text-shadow:1px 1px 1px rgba(0,0,0,0.2);
+    color:#ffd200;
+    /*text-shadow:1px 1px 5px rgba(0,0,0,0.05);*/
     border-left:0px solid white;
     transition: all 0.2s;
 }
 .sbbutton i {
     margin-left:5px;
+    color:#666;
 }
 .sbbutton:hover{
-    color:#ffefa4;
-    border-left:5px solid #ffefa4;
+    color:#ecc800;
+    border-left:5px solid #ecc800;
 }
