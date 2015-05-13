@@ -5,6 +5,7 @@ from DAO import Station, Bike, Trip
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import requests
+import helpers
 from random import randint
 
 app = Flask(__name__)
@@ -107,6 +108,8 @@ def drop_bike(station_id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        if not helpers.isLoginFormValid(request.form):
+            return render_template("login.html", status="failed")
         c = get_db().cursor()
         userid = int(request.form["userid"])
         password = request.form["password"]
