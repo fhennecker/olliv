@@ -31,7 +31,7 @@ CREATE TABLE Users(
 
 CREATE TABLE Subscribers(
     id                  INT UNSIGNED        NOT NULL,
-    rfid                INT UNSIGNED,
+    rfid                INT UNSIGNED        UNIQUE,
     lastName            TINYTEXT,
     firstName           TINYTEXT,
     addressTown         TINYTEXT,

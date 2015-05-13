@@ -5,6 +5,7 @@ from DAO import Station, Bike, Trip
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import requests
+from random import randint
 
 app = Flask(__name__)
 
@@ -142,9 +143,17 @@ def register():
         maxSubID = requests.getMaxSubID(c)
         newUserID = maxSubID + 1
         expiryDate = datetime.today() + relativedelta(years=1)
+        expiryDate = expiryDate.strftime("%Y-%m-%d %H:%M:%S")
+        rfid = "".join([str(rand(0,9)) for i in range(20)]) # random 20-char RFID generator
 
         c.execute("INSERT INTO Users VALUES (?, ?, ?, ?)", (newUserID, r["password"], expiryDate, r["card"]))
-        c.execute("INSERT INTO Subscribers VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (newUserID,0,r["lastname"], r["firstname"], r["city"], r["cp"], r["street"], r["number"], datetime.today(), r["phone"]))
+        inserted = False
+        while not inserted:
+            try:
+                c.execute("INSERT INTO Subscribers VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (newUserID,rfid,r["lastname"], r["firstname"], r["city"], r["cp"], r["street"], r["number"], datetime.today(), r["phone"]))
+                inserted = True
+            except sqlite3.IntegrityError:
+                pass # random rfid has a very small chance of colliding with an already existing rfid
         get_db().commit()
         return render_template("register.html", status="success", userid=newUserID)
     else:
