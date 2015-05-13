@@ -155,9 +155,9 @@ def register():
             except sqlite3.IntegrityError:
                 pass # random rfid has a very small chance of colliding with an already existing rfid
         get_db().commit()
-        return render_template("register.html", status="success", userid=newUserID)
+        return render_template("welcome.html", userid=newUserID)
     else:
-        return render_template("register.html", status="normal")
+        return render_template("register.html")
 
 @app.route('/language/<language>')
 def select_language(language):

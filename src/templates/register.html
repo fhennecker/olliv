@@ -1,8 +1,7 @@
 {% extends '_master.html' %}
 
 {% block body %}
-    {% if status == "success" %} <h3>{{ _('Welcome!') }}</h3> <p>{{ _('Your user ID is') }} {{ userid }}. {{ _("You'll need to log in with it so remember it!") }}</p> {% endif %}
-    {% if status == "normal" %}
+
     <div class="row"><div class="columns large-4 medium-4 small-6 large-centered medium-centered small-centered">
         <form action="" method="post" data-abide>
             <div class="firstname-field">
@@ -44,6 +43,4 @@
             <p><input type="submit" value="{{ _('Register') }}" class="button"></p>        
         </form>
     </div></div>
-    {% endif %}
-
 {% endblock %}
