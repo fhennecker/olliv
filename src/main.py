@@ -141,6 +141,8 @@ def register():
     if request.method == 'POST':
         c = get_db().cursor()
         r = request.form
+        if not helpers.isRegisterFormValid(r):
+            return render_template("register.html")
         maxSubID = requests.getMaxSubID(c)
         newUserID = maxSubID + 1
         expiryDate = datetime.today() + relativedelta(years=1)
