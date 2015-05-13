@@ -7,16 +7,16 @@
           <a href="#" class="close">&times;</a>
         </div>
     {% else %}
-        <div class="row"><div class="columns large-4 medium-4 small-6 large-centered medium-centered small-centered">
-            {% if status == "failed" %} 
-                <div data-alert class="alert-box alert radius">
-                    {{ _('Please retry') }}
-                    <a href="#" class="close">&times;</a>
-                </div>
-            {% endif %}
-            <form action="" method="post">
-                <p><input type="text" name="userid"></p>
-                <p><input type="password" name="password"></p>
+        <div class="row"><div class="columns large-6 medium-6 small-12 large-centered medium-centered small-centered">
+            <form action="" method="post" class="fullpage">
+                {% if status == "failed" %} 
+                    <div data-alert class="alert-box alert radius">
+                        {{ _('Please retry') }}
+                        <a href="#" class="close">&times;</a>
+                    </div>
+                {% endif %}
+                <p><input type="text" name="userid" placeholder="{{ _('User ID') }}"></p>
+                <p><input type="password" name="password" placeholder="{{ _('Password') }}"></p>
                 <p><input type="submit" value="{{ _('Login') }}" class="button"></p>        
             </form>
         </div></div>

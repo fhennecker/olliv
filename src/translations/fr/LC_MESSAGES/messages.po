@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-05-13 19:13+0200\n"
+"POT-Creation-Date: 2015-05-13 19:18+0200\n"
 "PO-Revision-Date: 2015-05-09 21:56+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -67,9 +67,17 @@ msgstr "Voir la liste des stations"
 msgid "You are already connected"
 msgstr "Vous êtes déjà connecté"
 
-#: templates/login.html:13
+#: templates/login.html:14
 msgid "Please retry"
 msgstr "Veuillez réessayer"
+
+#: templates/login.html:18
+msgid "User ID"
+msgstr "Numéro d'utilisateur"
+
+#: templates/login.html:19
+msgid "Password"
+msgstr "Mot de passe"
 
 #: templates/register.html:13
 msgid "First Name"
