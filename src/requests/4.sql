@@ -1,4 +1,4 @@
-SELECT TA.bike
+SELECT DISTINCT TA.bike
 FROM Trips AS TA
 INNER JOIN Trips AS TB
     ON TA.bike = TB.bike
