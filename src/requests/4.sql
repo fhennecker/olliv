@@ -1,4 +1,4 @@
-SELECT TA.bike, TB.bike, TA.startDate, TA.endDate, TB.startDate
+SELECT TA.bike
 FROM Trips AS TA
 INNER JOIN Trips AS TB
     ON TA.bike = TB.bike
