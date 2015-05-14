@@ -1,8 +1,8 @@
 CREATE TABLE Stations(
-    id          INT UNSIGNED        NOT NULL,
-    name        VARCHAR(64),
-    payTerminal BOOLEAN,
-    capacity    SMALLINT UNSIGNED,
+    id          INTEGER         NOT NULL,
+    name        TEXT,
+    payTerminal INTEGER,
+    capacity    INTEGER,
     gpsx        REAL,
     gpsy        REAL,
 
@@ -10,49 +10,49 @@ CREATE TABLE Stations(
 );
 
 CREATE TABLE Bikes(
-    id              MEDIUMINT UNSIGNED      NOT NULL,
-    commissionDate  DATE,
-    model           VARCHAR(64),
+    id              INTEGER      NOT NULL,
+    commissionDate  TEXT,
+    model           TEXT,
     state           TEXT,
-    station         INT UNSIGNED,
+    station         INTEGER,
 
     PRIMARY KEY (id),
     FOREIGN KEY (station) REFERENCES Stations(id)
 );
 
 CREATE TABLE Users(
-    id              INT UNSIGNED        NOT NULL,
-    password        TINYTEXT,
-    expiryDate      DATETIME,
-    cardNumber      BIGINT(16),
+    id              INTEGER     NOT NULL,
+    password        INTEGER,
+    expiryDate      TEXT,
+    cardNumber      INTEGER,
 
     PRIMARY KEY (id)
 );
 
 CREATE TABLE Subscribers(
-    id                  INT UNSIGNED        NOT NULL,
-    rfid                INT UNSIGNED        UNIQUE,
-    lastName            TINYTEXT,
-    firstName           TINYTEXT,
-    addressTown         TINYTEXT,
-    addressZIP          MEDIUMINT,
-    addressStreet       TINYTEXT,
-    addressNumber       VARCHAR(10),
-    registrationDate    DATETIME,
-    phone               VARCHAR(20),
+    id                  INTEGER        NOT NULL,
+    rfid                INTEGER        UNIQUE,
+    lastName            TEXT,
+    firstName           TEXT,
+    addressTown         TEXT,
+    addressZIP          TEXT,
+    addressStreet       TEXT,
+    addressNumber       TEXT,
+    registrationDate    TEXT,
+    phone               INTEGER,
 
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES Users(id)
 );
 
 CREATE TABLE Trips(
-    user            INT UNSIGNED      NOT NULL,
+    user            INTEGER     NOT NULL,
     startDate       TEXT,
     endDate         TEXT,
-    startStation    INT UNSIGNED,
-    endStation      INT UNSIGNED,
-    bike            INT UNSIGNED,
-    paid            BOOLEAN,
+    startStation    INTEGER,
+    endStation      INTEGER,
+    bike            INTEGER,
+    paid            INTEGER,
 
     PRIMARY KEY (user, startDate),
     FOREIGN KEY (user) REFERENCES Users(id),
