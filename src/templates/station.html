@@ -27,7 +27,7 @@
     <ul>
         {% for bike in bikes %}
             <li>{{ bike.id }} 
-                {% if "userid" in session and not session["isInTrip"] and bike.state == None %}
+                {% if "userid" in session and not session["isInTrip"] and bike.state == None and "expired-ticket" not in announcements %}
                     - <a href="/bike/{{ bike.id }}">{{ _('Take it') }}</a>
                 {% endif %}
             </li>

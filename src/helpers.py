@@ -1,3 +1,6 @@
+import requests
+from datetime import datetime
+
 # small helper function to validate all fixed-length digits
 def validLengthDigit(toCheck, numberOfDigits):
     if len(toCheck) != numberOfDigits :
@@ -54,3 +57,11 @@ def isTicketFormValid(form):
 
 def isInTrip(session):
     return "userid" in session and "isInTrip" in session and session["isInTrip"] 
+
+def announcements(session, cursor):
+    res = []
+    if "userid" in session:
+        edate = requests.getUserExpiryDate(cursor, session["userid"])
+        if edate < datetime.now():
+            res.append("expired-ticket")
+    return res

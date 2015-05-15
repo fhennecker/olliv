@@ -33,6 +33,9 @@ def getCursor():
     """ Getting the cursor for the database """
     return get_db().cursor()
 
+@app.context_processor
+def inject_announcement():
+    return dict(announcements=helpers.announcements(session, getCursor()))
 
 ################################################################################
 # Internationalization 
