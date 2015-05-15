@@ -107,3 +107,11 @@ form.fullpage {
     color:white;
 }
 
+.homepagelink, .homepagelink a{
+    text-align: center;
+    color:#ffd200;
+    font-family: "montserrat";
+    font-weight:bold;
+    font-size: 20pt;
+}
+

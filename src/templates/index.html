@@ -3,11 +3,25 @@
 {% block body %}
     {% if "userid" in session  %}
         <h3>{{ _('Hello') }} {{ session["firstname"] + " " + session["lastname"] }}!</h3>
-        <a href="/stations">{{ _('See the list of stations') }} &gt;</a><br/>
-        <a href="/logout">{{ _('Logout') }} &gt;</a>
+        <table style="width:100%; border:none;">
+            <tr>
+                <td class="homepagelink"><a href="/stations"><i class="fa fa-map-marker"></i> &nbsp;{{ _('Stations') }}</a><br/></td>
+                <td class="homepagelink">
+                    <a href="/trips">
+                        <i class="fa fa-bicycle"></i> &nbsp;{{ _('My Trips') }}
+                    </a>
+                </td>
+                <td class="homepagelink"><a href="/logout"><i class="fa fa-sign-out"></i> &nbsp;{{ _('Logout') }}</a></td>
+            </tr>
+        </table>
     {% else %}
         <h3>Hello world!</h3>
-        <a href="/stations">{{ _('See the list of stations') }} &gt;</a><br/>
-        <a href="/login">{{ _('Login') }} &gt;</a>
+        <table style="width:100%; border:none;">
+            <tr>
+                <td class="homepagelink"><a href="/stations"><i class="fa fa-map-marker"></i> &nbsp;{{ _('Stations') }}</a><br/></td>
+                <td class="homepagelink"><a href="/login"><i class="fa fa-sign-in"></i> &nbsp;{{ _('Login') }}</a></td>
+            </tr>
+        </table>
     {% endif %}
+    <img src="/static/welcome.jpg" style="width:100%">
 {% endblock %}
