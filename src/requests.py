@@ -133,7 +133,7 @@ def almostFullStations(c):
     return map(Station, c.execute("""SELECT Stations.*, COUNT(*) AS cnt FROM Bikes
                                         INNER JOIN Stations ON Bikes.station = Stations.id
                                         GROUP BY station
-                                        HAVING cnt > Stations.capacity - 6
+                                        HAVING cnt > Stations.capacity - 6 AND cnt != Stations.capacity
                                         """))
 def emptyStations(c):
     return map(Station, c.execute("""SELECT Stations.*, COUNT(*) AS cnt FROM Bikes
@@ -145,5 +145,5 @@ def almostEmptyStations(c):
     return map(Station, c.execute("""SELECT Stations.*, COUNT(*) AS cnt FROM Bikes
                                         INNER JOIN Stations ON Bikes.station = Stations.id
                                         GROUP BY station
-                                        HAVING cnt < 5
+                                        HAVING cnt < 5 and cnt != 0
                                         """))
