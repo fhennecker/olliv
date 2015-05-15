@@ -1,0 +1,29 @@
+{% extends '_master.html' %}
+
+{% block body %}
+    <h1>Administration</h1>
+    <div class="row">
+
+        <div class="columns large-12 medium-12 small-12">
+            <h3>Broken bikes</h3>
+            <table style="width:100%; border:none;">
+                <thead>
+                    <tr>
+                        <td>Bike id</td>
+                        <td>Station</td>
+                        <td>Issue</td>
+                    </tr>
+                </thead>
+                {% for bike in brokenBikes %}
+                    <tr>
+                        <td>{{bike.id}}</td>
+                        <td>{{bike.station}}</td>
+                        <td>{{bike.state}}</td>
+                    </tr>
+                {% endfor%}
+            </table>
+        </div>
+
+
+    </div>
+{% endblock %}

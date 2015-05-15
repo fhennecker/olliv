@@ -15,7 +15,7 @@ class Station(object):
         self.gpsy = -1 if "gpsy" not in keys else row["gpsy"]
 
     def __str__(self):
-        return "#"+str(self.id)+" - "+self.name+" ("+str(self.capacity)+")"
+        return "#"+str(self.id)+" - "+self.name
 
 class Bike():
     def __init__(self, row):
@@ -25,6 +25,8 @@ class Bike():
         self.model = "" if "model" not in keys else row["model"]
         self.state = None if "state" not in keys else row["state"]
         self.station = None if ("station" not in keys or row["station"] == None) else Station({"id":row["station"]})
+        if "sName" in keys:
+            self.station.name = row["sName"]
 
     def __str__(self):
         return "#"+str(self.id)+" - "+self.model+" ("+("OK" if self.state else "NOK") +")"
@@ -32,7 +34,6 @@ class Bike():
 class Trip():
     def __init__(self, row):
         keys = row.keys()
-        print keys
         self.user = "" if "user" not in keys else row["user"]
         self.startDate = None if "startDate" not in keys else datetime.strptime(row["startDate"], "%Y-%m-%d %H:%M:%S")
         self.endDate = None if ("endDate" not in keys or row["endDate"] == None) else datetime.strptime(row["endDate"], "%Y-%m-%d %H:%M:%S")

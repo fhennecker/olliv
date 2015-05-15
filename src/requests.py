@@ -119,3 +119,6 @@ def dropBike(c, db, startTime, userID, endStationID, bikeID):
     c.execute("UPDATE Trips SET endDate = (?), endStation = (?) WHERE user = (?) AND startDate = (?)", (today, endStationID, userID, startTime))
     c.execute("UPDATE Bikes SET station = (?) WHERE id = (?)", (endStationID, bikeID))
     db.commit()
+
+def brokenBikes(c):
+    return map(Bike, c.execute("SELECT Bikes.*, Stations.name AS sName FROM Bikes LEFT JOIN Stations ON Bikes.station = Stations.id WHERE state IS NOT NULL").fetchall())

@@ -214,6 +214,19 @@ def register():
     else:
         return render_template("register.html")
 
+@app.route('/admin')
+def admin():
+    c = getCursor()
+    fullStations = []
+    emptyStations = []
+    almostFullStations = []
+    almostEmptyStations = []
+    return render_template("admin.html",    fullStations=fullStations, \
+                                            emptyStations=emptyStations, \
+                                            almostEmptyStations=almostEmptyStations, \
+                                            almostFullStations=almostFullStations, \
+                                            brokenBikes=requests.brokenBikes(c))
+
 
 ################################################################################
 # Settings routes
