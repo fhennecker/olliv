@@ -9,6 +9,10 @@ def getUserCredentials(c, userID):
 def getUserNames(c, userID):
     return c.execute("SELECT firstname, lastname FROM Subscribers WHERE id == (?)", (userID,)).fetchone()
 
+def getUserExpiryDate(c, userID):
+    res = c.execute("SELECT expiryDate FROM Users WHERE id = (?)", (userID,)).fetchone()
+    return datetime.strptime(res["expiryDate"][:19], "%Y-%m-%d %H:%M:%S")
+
 def getMaxSubID(c):
     return c.execute("SELECT Max(id) FROM Subscribers").fetchone()[0]
 

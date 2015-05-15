@@ -111,6 +111,11 @@ def display_bike(bike_id):
         return redirect("/stations")
 
     c = getCursor()
+
+    # checking if the user has a valid ticket
+    if requests.getUserExpiryDate(c, session["userid"]) < datetime.now():
+        return redirect("/stations")
+
     bike = requests.getBike(c, bike_id)
     if bike is None:
         abort(404)
@@ -155,7 +160,7 @@ def login():
 
         c = get_db().cursor()
         userid = int(request.form["userid"])
-        password = request.form["password"]
+        password = int(request.form["password"])
         userinfo = requests.getUserCredentials(getCursor(), userid)
 
         # correct password, updating session

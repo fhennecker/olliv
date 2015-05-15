@@ -37,8 +37,8 @@ for subscriber in tree.getroot().findall("subscribers")[0].findall("user"):
     cp = subscriber.findall("address")[0].findall("cp")[0].text
     street = subscriber.findall("address")[0].findall("street")[0].text
     number = subscriber.findall("address")[0].findall("number")[0].text
-    subscribeDate = subscriber.findall("subscribeDate")[0].text
-    expiryDate = subscriber.findall("expiryDate")[0].text
+    subscribeDate = subscriber.findall("subscribeDate")[0].text.replace("T", " ")
+    expiryDate = subscriber.findall("expiryDate")[0].text.replace("T", " ")
     card = subscriber.findall("card")[0].text
 
     c.execute("INSERT INTO Users VALUES (?, ?, ?, ?)", (userid, password, expiryDate, card))
@@ -47,7 +47,7 @@ for subscriber in tree.getroot().findall("subscribers")[0].findall("user"):
 for tempUser in tree.getroot().findall("temporaryUsers")[0].findall("user"):
     userid = tempUser.findall("userID")[0].text
     password = tempUser.findall("password")[0].text
-    expiryDate = tempUser.findall("expiryDate")[0].text
+    expiryDate = tempUser.findall("expiryDate")[0].text.replace("T", " ")
     card = tempUser.findall("card")[0].text
 
     c.execute("INSERT INTO Users VALUES (?, ?, ?, ?)", (userid, password, expiryDate, card))
