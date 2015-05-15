@@ -2,17 +2,40 @@
 
 {% block body %}
 
+    <h1>{{ _('My Trips') }}</h1>
+
     {% if "firstname" in session %}
-        {% for trip in trips %}
-            <p>
-                <strong><a href="/station/{{trip.startStation.id}}">{{ trip.startStation.name }}</a></strong> 
-                ({{ trip.startDate }}) <i class="fa fa-bicycle"></i> 
-                <strong><a href="/station/{{trip.endStation.id}}">{{ trip.endStation.name }}</a></strong> 
-                ({{ trip.endDate }}) | 
-                <strong>{{ trip.minutesSpent() }}</strong> {{ _('minutes') }}, 
-                <strong>{{ trip.cost() }}</strong>€
-            </p>
-        {% endfor %}
+        <table style="width:100%; border:none;">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th><i class="fa fa-clock-o"></i></th>
+                    <th>€</th>
+                </tr>
+            </thead>
+            {% for trip in trips %}
+                <tr>
+                    <td>
+                        {% if trip.endStation != None and trip.endStation.id != None %}
+                            <span class="radius secondary label">{{ trip.shortStartDate() }}</span>
+                        {% else %}
+                            <span class="radius label"><a href="/bike/{{trip.bike}}">{{ trip.shortStartDate() }}</a></span>
+                        {% endif %}
+                        <strong><a href="/station/{{trip.startStation.id}}">{{ trip.startStation.name }}</a></strong> 
+                        <i class="fa fa-bicycle"></i> 
+                        {% if trip.endStation != None and trip.endStation.id != None %}
+                            <strong><a href="/station/{{trip.endStation.id}}">{{ trip.endStation.name }}</a></strong>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <strong>{{ trip.minutesSpent() }}</strong> {{ _('minutes') }}
+                    </td>
+                    <td>
+                        <strong>{{ trip.cost() }}</strong>€
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
     {% else %}
         <div data-alert class="alert-box warning radius">
             {{ _('You must be logged in to view this page.') }}

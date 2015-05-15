@@ -32,20 +32,35 @@ class Bike():
 class Trip():
     def __init__(self, row):
         keys = row.keys()
+        print keys
         self.user = "" if "user" not in keys else row["user"]
-        self.startDate = None if "startDate" not in keys else row["startDate"]
-        self.endDate = None if "endDate" not in keys else row["endDate"]
+        self.startDate = None if "startDate" not in keys else datetime.strptime(row["startDate"], "%Y-%m-%d %H:%M:%S")
+        self.endDate = None if ("endDate" not in keys or row["endDate"] == None) else datetime.strptime(row["endDate"], "%Y-%m-%d %H:%M:%S")
         self.startStation = None if "startStation" not in keys else Station({"id":row["startStation"]})
         self.endStation = None if "endStation" not in keys else Station({"id":row["endStation"]})
         self.bike = "" if "bike" not in keys else row["bike"]
         self.paid = "" if "paid" not in keys else row["paid"]
 
+        if "sName" in keys:
+            self.startStation.name = row["sName"]
+        if "eName" in keys:
+            self.endStation.name = row["eName"]
+
+    def shortStartDate(self):
+        if self.startDate is None:
+            return "?"
+        return self.startDate.strftime("%d/%m/%y %H:%M")
+
+    def shortEndDate(self):
+        if self.startDate is None:
+            return "?"
+        return self.endDate.strftime("%d/%m/%y %H:%M")
+
     def minutesSpent(self):
-        start = datetime.strptime(self.startDate, "%Y-%m-%d %H:%M:%S")
         end = datetime.today()
         if self.endDate:
-            end = datetime.strptime(self.endDate, "%Y-%m-%d %H:%M:%S")
-        return timedeltaToMinutes(end-start)
+            end = self.endDate
+        return timedeltaToMinutes(end-self.startDate)
 
     def cost(self):
         minutes = self.minutesSpent()

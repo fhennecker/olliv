@@ -91,7 +91,10 @@ def getLastTripForBike(c, bikeID):
     return None
 
 def getTripsForUserID(c, userID):
-    return  map(Trip, c.execute(""" SELECT * FROM Trips WHERE user = (?) ORDER BY startDate DESC""", (userID,)))
+    return  map(Trip, c.execute(""" SELECT Trips.*, SA.name AS sName, SB.name as eName FROM Trips 
+                                    LEFT JOIN Stations AS SA ON startStation = SA.id
+                                    LEFT JOIN Stations AS SB ON endStation = SB.id
+                                    WHERE user = (?) ORDER BY startDate DESC""", (userID,)))
 
 def getLastTripForUser(c, userID):
     res = c.execute("""SELECT *, Max(startDate) FROM Trips WHERE user = (?)""", (userID,)).fetchone()
@@ -105,6 +108,7 @@ def changeState(c, db, bikeID, state):
  
 
 def takeBike(c, db, bikeID, userID, startStationID):
+    print "hello"
     today = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
     c.execute("INSERT INTO Trips VALUES (?, ?, ?, ?, ?, ?, ?)", (userID, today, None, startStationID, None, bikeID, False))
     c.execute("UPDATE Bikes SET station = (?) WHERE id = (?)", (None, bikeID))
