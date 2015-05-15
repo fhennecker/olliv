@@ -2,35 +2,38 @@
 
 {% block body %}
     <h1>{{ station.name.capitalize() }}</h1>
-    {{ station }} - ({{freespots}} {{_('free spots left')}})
-    <h3>{{ _('Bikes') }}</h3>
-    {% if session["isInTrip"] %}
-        {% if freespots > 0 %}
-        <p><a class="button small radius" href="/drop/{{station.id}}">{{ _('Drop your bike here') }}</a> 
-	<form action="" method="post">
-            <input type="hidden" name="diff" value="complain">
-            <p><input type="text" name="state"></p>
-            <p><input type="submit" value="{{ _('Complain') }}" class="button"></p>        
-        </form></p>
-        {% else %}
-            <div data-alert class="alert-box warning radius">
-                {{ _('This station is full!') }}
-                <a href="#" class="close">&times;</a>
-            </div>
+    <div class="columns large-7 medium-7 small-12">
+        <p><strong>{{freespots}} {{_('free spots left')}}</strong></p>
+        {% if session["isInTrip"] %}
+            {% if freespots > 0 %}
+            <p><a class="button small radius" href="/drop/{{station.id}}">{{ _('Drop your bike here') }}</a> 
+    	<form action="" method="post">
+                <input type="hidden" name="diff" value="complain">
+                <p><input type="text" name="state"></p>
+                <p><input type="submit" value="{{ _('Complain') }}" class="button"></p>        
+            </form></p>
+            {% else %}
+                <div data-alert class="alert-box warning radius">
+                    {{ _('This station is full!') }}
+                    <a href="#" class="close">&times;</a>
+                </div>
+            {% endif %}
         {% endif %}
-    {% endif %}
 
-    {% if ("userid" not in session) and station.payTerminal %}
-        {% include '_tickets.html' %}
-    {% endif %}
-
-    <ul>
+        <p>
         {% for bike in bikes %}
-            <li>{{ bike.id }} 
-                {% if "userid" in session and not session["isInTrip"] and bike.state == None and "expired-ticket" not in announcements %}
-                    - <a href="/bike/{{ bike.id }}">{{ _('Take it') }}</a>
-                {% endif %}
-            </li>
+            
+            {% if "userid" in session and not session["isInTrip"] and bike.state == None and "expired-ticket" not in announcements %}
+                <a class="success radius button" href="/bike/{{ bike.id }}">{{ bike.id }} <i class="fa fa-arrow-right"></i></a>
+            {% else %}
+                <a class="secondary radius button disabled" href="/bike/{{ bike.id }}">{{ bike.id }} </a>
+            {% endif %}
         {% endfor %}
-    </ul>
+        </p>
+    </div>
+    <div class="columns large-5 medium-5 small-12">
+        {% if ("userid" not in session) and station.payTerminal %}
+            {% include '_tickets.html' %}
+        {% endif %}
+    </div>
 {% endblock body %} 
