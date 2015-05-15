@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-05-13 19:18+0200\n"
+"POT-Creation-Date: 2015-05-15 02:52+0200\n"
 "PO-Revision-Date: 2015-05-09 21:56+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -16,6 +16,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
+
+#: templates/_master.html:15
+msgid "You don't have any valid ticket!"
+msgstr "Vous n'avez plus de ticket valide!"
+
+#: templates/_master.html:21
+msgid "Your ticket is almost expired!"
+msgstr "Votre ticket est presque expiré!"
 
 #: templates/_tickets.html:5
 msgid "1-day ticket"
