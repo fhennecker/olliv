@@ -25,5 +25,50 @@
         </div>
 
 
+        <div class="columns large-6 medium-6 small-12">
+            <h3>Full Stations</h3>
+            <p>
+                {% for station in fullStations %}
+                    <span class="radius alert label"><a href="/station/{{station.id}}">{{station}}</a></span><br/>
+                {% else %}
+                    <span class="radius success label">No full stations</span><br/>
+                {% endfor %}
+            </p>
+        </div>
+
+        <div class="columns large-6 medium-6 small-12">
+            <h3>Almost Full Stations</h3>
+            <p>
+                {% for station in almostFullStations %}
+                    <span class="radius warning label"><a href="/station/{{station.id}}">{{station}}</a></span><br/>
+                {% else %}
+                    <span class="radius success label">No almost full stations</span><br/>
+                {% endfor %}
+            </p>
+        </div>
+
+        <div class="columns large-6 medium-6 small-12">
+            <h3>Empty Stations</h3>
+            <p>
+                {% for station in emptyStations %}
+                    <span class="radius alert label"><a href="/station/{{station.id}}">{{station}}</a></span><br/>
+                {% else %}
+                    <span class="radius success label">No empty stations</span><br/>
+                {% endfor %}
+            </p>
+        </div>
+
+        <div class="columns large-6 medium-6 small-12">
+            <h3>Almost Empty Stations</h3>
+            <p>
+                {% for station in almostEmptyStations %}
+                    <span class="radius warning label"><a href="/station/{{station.id}}">{{station}}</a></span><br/>
+                {% else %}
+                    <span class="radius success label">No almost empty stations</span><br/>
+                {% endfor %}
+            </p>
+        </div>
+
+
     </div>
 {% endblock %}

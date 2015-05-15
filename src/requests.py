@@ -122,3 +122,28 @@ def dropBike(c, db, startTime, userID, endStationID, bikeID):
 
 def brokenBikes(c):
     return map(Bike, c.execute("SELECT Bikes.*, Stations.name AS sName FROM Bikes LEFT JOIN Stations ON Bikes.station = Stations.id WHERE state IS NOT NULL").fetchall())
+
+def fullStations(c):
+    return map(Station, c.execute("""SELECT Stations.*, COUNT(*) AS cnt FROM Bikes
+                                        INNER JOIN Stations ON Bikes.station = Stations.id
+                                        GROUP BY station
+                                        HAVING cnt = Stations.capacity
+                                        """))
+def almostFullStations(c):
+    return map(Station, c.execute("""SELECT Stations.*, COUNT(*) AS cnt FROM Bikes
+                                        INNER JOIN Stations ON Bikes.station = Stations.id
+                                        GROUP BY station
+                                        HAVING cnt > Stations.capacity - 6
+                                        """))
+def emptyStations(c):
+    return map(Station, c.execute("""SELECT Stations.*, COUNT(*) AS cnt FROM Bikes
+                                        INNER JOIN Stations ON Bikes.station = Stations.id
+                                        GROUP BY station
+                                        HAVING cnt = 0
+                                        """))
+def almostEmptyStations(c):
+    return map(Station, c.execute("""SELECT Stations.*, COUNT(*) AS cnt FROM Bikes
+                                        INNER JOIN Stations ON Bikes.station = Stations.id
+                                        GROUP BY station
+                                        HAVING cnt < 5
+                                        """))

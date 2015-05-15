@@ -217,14 +217,10 @@ def register():
 @app.route('/admin')
 def admin():
     c = getCursor()
-    fullStations = []
-    emptyStations = []
-    almostFullStations = []
-    almostEmptyStations = []
-    return render_template("admin.html",    fullStations=fullStations, \
-                                            emptyStations=emptyStations, \
-                                            almostEmptyStations=almostEmptyStations, \
-                                            almostFullStations=almostFullStations, \
+    return render_template("admin.html",    fullStations=requests.fullStations(c), \
+                                            emptyStations=requests.emptyStations(c), \
+                                            almostEmptyStations=requests.almostEmptyStations(c), \
+                                            almostFullStations=requests.almostFullStations(c), \
                                             brokenBikes=requests.brokenBikes(c))
 
 
