@@ -168,7 +168,7 @@ CREATE TABLE Trips(
   \end{verbatim}
   
     \paragraph{Algèbre relationnelle}
-    $$ Subs \leftarrow rename(Subscribers, (id \rightarrow subid))$$
+    $$ Subs \leftarrow \alpha_{id:subid}(Subscribers)$$
     $$TripsFromSubsInXL \leftarrow Trips\ \Bowtie_{user=subid\ and\ addressZIP='1050'}\ Subs$$
     $$FullResult \leftarrow TripsFromSubsInXL\ \Bowtie_{startStation=id\ and\  name='FLAGEY'}\ Stations$$
     $$Result \leftarrow \pi_{subid}(FullResult)$$
@@ -192,8 +192,8 @@ CREATE TABLE Trips(
   \end{verbatim}
   
   \paragraph{Algèbre relationnelle}
-  $$ TA \leftarrow rename(Trips, (user \rightarrow ua, startDate \rightarrow sa)) $$
-  $$ TB \leftarrow rename(Trips, (user \rightarrow ub, startDate \rightarrow sb)) $$
+  $$ TA \leftarrow \alpha_{user:ua, startDate:sa}(Trips) $$
+  $$ TB \leftarrow \alpha_{user:ub, startDate:sb}(Trips) $$
   $$FullResult \leftarrow TA\ \Bowtie_{ua=ba\ and\ sa!=sb}\ TB $$
   $$Result \leftarrow \pi_{ua}(FullResult)$$
   
@@ -217,8 +217,8 @@ CREATE TABLE Trips(
     Le \texttt{ON TA.user < TB.user} permet de ne sélectionner qu'une fois une paire. Si on avait utilisé \texttt{ON TA.user != TB.user}, on aurait eu les deux permutations à chaque fois.
     
     \paragraph{Algèbre relationnelle}
-    $$ TA \leftarrow rename(Trips, (user \rightarrow ua, startDate \rightarrow sa, endDate \rightarrow ea)) $$
-    $$ TB \leftarrow rename(Trips, (user \rightarrow ub, startDate \rightarrow sb, endDate \rightarrow eb)) $$
+    $$ TA \leftarrow \alpha_{user:ua, startDate:sa, endDate:ea}(Trips) $$
+    $$ TB \leftarrow \alpha_{user:ub, startDate:sb, endDate:eb}(Trips) $$
     $$ FullResult \leftarrow TA\ \Bowtie_{ua>ub\ and\ sa=sb\ and\ ea=eb}\ TB$$
     $$ Result \leftarrow \pi_{ua, ub} (FullResult) $$
 
@@ -244,8 +244,8 @@ CREATE TABLE Trips(
   \end{verbatim}
   
     \paragraph{Algèbre relationnelle}
-    $$ TA \leftarrow rename(Trips, (startDate \rightarrow sda, endStation \rightarrow esa, bike \rightarrow ba)) $$
-    $$ TB \leftarrow rename(Trips, (startDate \rightarrow sdb, startStation \rightarrow ssb)) $$
+    $$ TA \leftarrow \alpha_{startDate:sda, endStation:esa, bike:ba}(Trips) $$
+    $$ TB \leftarrow \alpha_{startDate:sdb, startStation:ssb}(Trips) $$
     $$ Joint \leftarrow TA\ \Bowtie_{sda < sdb}\ TB $$
     $$ Consec \leftarrow \gamma_{sda}(Joint) $$
     $$ Disjoint \leftarrow \sigma_{esa \neq ssb}(Consec)$$
@@ -259,7 +259,7 @@ CREATE TABLE Trips(
 \subsection{Cinquième requête}
     Les utilisateurs, la date d'inscription, le nombre total de trajets effectués, la distance totale parcourue et la distance moyenne parcourue par trajet, classés en fonction de la distance totale parcourue.
     
-    \textbf{Remarque :} SQLite3, le système de bases de données que nous avons choisi ne supporte que très peu de fonctions mathématiques. Il a donc fallu écrire une extension C (voir annexe \ref{extension-c}) pour calculer la distance entre deux points données par des coordonnées géographiques. Il suffit ensuite de la compiler en librairie dynamique et de la charger au run-time (\texttt{.load ../distance}).
+    \textbf{Remarque :} SQLite3, le système de bases de données que nous avons choisi ne supporte que très peu de fonctions mathématiques. Il a donc fallu écrire une extension C (voir annexe \ref{extension-c}) pour calculer la distance entre deux points exprimés en coordonnées géographiques. Il suffit ensuite de la compiler en librairie dynamique et de la charger au run-time (\texttt{.load ../distance}).
     
     \textbf{Remarque bis :} La requête demande de classer les utilisateurs mais de sélectionner également la date d'inscription qui n'est donnée que pour les abonnés (y compris dans les données de départ). On effectue donc la requête uniquement pour les abonnés.
 
