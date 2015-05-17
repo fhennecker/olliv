@@ -152,6 +152,8 @@ CREATE TABLE Trips(
   
   \paragraph{Typage de Bikes.state} Nous avons choisi d'utiliser un champ de type \texttt{TEXT} qui sera \texttt{NULL} si le vélo fonctionne; et qui contiendra le problème signalé s'il y en a un.
 
+  \paragraph{Attribut Trips.paid} Il s'agit d'un attribut que nous avons rajouté pour faciliter la facturation.
+
 \section{Différentes requêtes}
 
 
@@ -420,9 +422,9 @@ CREATE TABLE Trips(
     \end{figure}
     
     \begin{figure}
-    \label{fig-s10}
     \includegraphics[width=\textwidth]{images/s10.png}
     \caption{Mes voyages}
+    \label{fig-s10}
     \end{figure}
     
     \subsubsection{Signaler un vélo}
@@ -483,13 +485,28 @@ CREATE TABLE Trips(
     L'affichage des stations se fait sur une carte Google Maps grâce à l'utilisation de l'API javascript publique. Les limitations de cette API gratuite sont suffisamment amples pour un projet de cette échelle.
     
     \subsubsection{Dashboard administrateur}
-    Nous avons décidé de développer un dashboard accessible au chemin \texttt{/admin}, de manière non-sécurisée pour des raisons de clarté et d'accessibilité. On peut y voir la liste des vélos cassés et la station où ils sont rangés, les stations remplies et presque remplies ainsi que les stations vides et presque vides. Ce dashboard peut donc donner une vue d'ensemble intéressante sur les problèmes critiques du système à tout administrateur (fig \ref{fig-s22})
+    Nous avons décidé de développer un dashboard accessible au chemin \texttt{/admin}, de manière non-sécurisée pour des raisons de clarté et d'accessibilité. On peut y voir la liste des vélos cassés et la station où ils sont rangés, les stations remplies et presque remplies ainsi que les stations vides et presque vides. Ce dashboard peut donc donner une vue d'ensemble intéressante sur les problèmes critiques du système à tout administrateur (fig \ref{fig-s22}). Voici par exemple la requête SQL qui permet de récupérer la liste des stations presque vides :\\
+
+    \begin{verbatim}
+    SELECT Stations.*, COUNT(*) AS cnt FROM Bikes
+    INNER JOIN Stations ON Bikes.station = Stations.id
+    GROUP BY station
+    HAVING cnt < 5 and cnt != 0
+    \end{verbatim}
     
     \begin{figure}
     \includegraphics[width=\textwidth]{images/s22.png}
     \caption{Dashboard administrateur}
     \label{fig-s22}
     \end{figure}
+
+    \subsubsection{Protection contre l'injection SQL}
+    Toutes les requêtes sont codées de manière à ce que l'entrée d'un utilisateur est assainie. Un utilisateur peut donc se prénommer \texttt{"; DROP TABLE Stations} sans aucun souci.\\
+
+    Il suffit en fait, en Python et SQLite3 de passer les paramètres (dans l'exemple ci-dessous, \texttt{id}) à une requête de cette manière:\\
+
+    \texttt{c.execute("SELECT * FROM Bikes WHERE id == (?)", (id,))}\\
+
     
     \subsubsection{Design}
     Outre le thème jaune imposé par la ville de Bruxelles, nous avons pensé à rendre le site accessible sur des terminaux mobile. Le design est entièrement \textit{responsive} (fig \ref{fig-s23}).
